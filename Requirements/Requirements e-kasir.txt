@@ -1,0 +1,34 @@
+=========================
+= Requirements E-Kasir  =
+= CV. Mitra Informatika =
+=========================
+#Laravel Framework
+#Online web-base
+=========================
+
+    = Barang =
+<*> Mampu mengelola data barang
+    - Mampu menambah kategori barang
+    - Mampu menambah data barang
+    - Mampu melihat data barang
+    - Mampu mengedit data barang
+	> Edit harga barang
+	> Edit detail barang
+    - Mampu Menghapus data barang
+    - Mampu Menampilkan notifikasi data barang kadaluarsa
+
+    = Barcode =
+<*> Mampu mengelola barcode barang
+    - Mampu generate barcode barang
+    - Mampu print barcode barang
+
+    = Transaksi =
+<*> Mampu mengelola pembayaran belanja
+    - Mampu melakukan scan barcode barang
+    - Mampu menghitung total belanja
+    - Mampu memverifikasi pembayaran cash
+    - Mampu print struk pembayaran
+
+    = Laporan Transaksi =
+<*> Mampu menampilkan laporan transaksi penjualan
+<*> Mampu melakukan print laporan transaksi penjualan
