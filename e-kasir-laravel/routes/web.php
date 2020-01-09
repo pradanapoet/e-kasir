@@ -12,5 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/postlogin','AuthController@postlogin');
+Route::get('/logout', 'AuthController@logout');
+// Route::get('/pemilik/dashboard', 'PemilikController@index');
+
+// Hanya Pemilik
+Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
+
+    Route::get('/pemilik', 'PemilikController@index');
+
+});
+
+
+//Hanya Kasir
+Route::group(['middleware' => ['auth','checkRole:kasir']],function(){
+
+    Route::get('/kasir', 'KasirController@index');
+
 });
