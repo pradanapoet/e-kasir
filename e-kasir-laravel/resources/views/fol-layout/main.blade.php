@@ -39,7 +39,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            @if(auth()->user()->role=='pemilik')
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pemilik">
+            @elseif(auth()->user()->role=='kasir')
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/kasir">
+            @endif
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -51,9 +55,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                @if(auth()->user()->role=='pemilik')
+                    <a class="nav-link" href="/pemilik">
+                @elseif(auth()->user()->role=='kasir')
+                    <a class="nav-link" href="/kasir">
+                @endif
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
