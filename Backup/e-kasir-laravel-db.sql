@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2020 at 12:25 PM
+-- Generation Time: Jan 16, 2020 at 04:56 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -56,7 +56,7 @@ CREATE TABLE `detail_transaksi` (
 --
 
 CREATE TABLE `kategori` (
-  `id_kategori` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nama_kategori` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -66,10 +66,10 @@ CREATE TABLE `kategori` (
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `updated_at`, `created_at`) VALUES
+INSERT INTO `kategori` (`id`, `nama_kategori`, `updated_at`, `created_at`) VALUES
 (1, 'Makanan Ringan', '2020-01-15 11:16:18', '0000-00-00 00:00:00'),
 (2, 'Makanan Berat', '2020-01-15 11:16:18', '0000-00-00 00:00:00'),
-(3, 'Pengharum Ruangan', '2020-01-15 04:16:53', '2020-01-15 04:16:53');
+(15, 'Minuman', '2020-01-16 06:45:15', '2020-01-16 06:45:15');
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ ALTER TABLE `detail_transaksi`
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`id_kategori`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -215,7 +215,7 @@ ALTER TABLE `detail_transaksi`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `migrations`
