@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2020 at 04:56 PM
+-- Generation Time: Jan 17, 2020 at 04:17 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -32,8 +32,18 @@ CREATE TABLE `barang` (
   `id_barang` int(11) NOT NULL,
   `id_kategori` int(11) DEFAULT NULL,
   `nama_barang` varchar(100) DEFAULT NULL,
-  `keterangan` text
+  `keterangan` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `id_kategori`, `nama_barang`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Sunlight', NULL, '2020-01-17 01:34:02', '2020-01-17 01:34:02'),
+(4, 2, 'tempe kripek', 'tempe', '2020-01-17 10:02:49', '2020-01-17 03:02:49');
 
 -- --------------------------------------------------------
 
@@ -56,7 +66,7 @@ CREATE TABLE `detail_transaksi` (
 --
 
 CREATE TABLE `kategori` (
-  `id` int(11) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -66,10 +76,9 @@ CREATE TABLE `kategori` (
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id`, `nama_kategori`, `updated_at`, `created_at`) VALUES
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `updated_at`, `created_at`) VALUES
 (1, 'Makanan Ringan', '2020-01-15 11:16:18', '0000-00-00 00:00:00'),
-(2, 'Makanan Berat', '2020-01-15 11:16:18', '0000-00-00 00:00:00'),
-(15, 'Minuman', '2020-01-16 06:45:15', '2020-01-16 06:45:15');
+(2, 'Makanan Berat', '2020-01-15 11:16:18', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -101,13 +110,23 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `stok` (
   `id_stok` int(11) NOT NULL,
   `id_barang` int(11) DEFAULT NULL,
-  `nama_stok` varchar(100) DEFAULT NULL,
   `jumlah_stok_masuk` int(11) DEFAULT NULL,
   `tanggal_masuk` date DEFAULT NULL,
   `tanggal_kadaluarsa` date DEFAULT NULL,
   `sisa_stok` int(11) DEFAULT NULL,
-  `harga` int(11) DEFAULT NULL
+  `harga_beli` int(11) DEFAULT NULL,
+  `harga_jual` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stok`
+--
+
+INSERT INTO `stok` (`id_stok`, `id_barang`, `jumlah_stok_masuk`, `tanggal_masuk`, `tanggal_kadaluarsa`, `sisa_stok`, `harga_beli`, `harga_jual`, `created_at`, `updated_at`) VALUES
+(2, 1, 20, '2020-01-18', '2020-01-25', 20, 20000, 30000, '2020-01-17 13:51:46', '2020-01-17 06:51:46'),
+(3, 4, 90, '2020-01-24', '2020-01-30', 90, 100, 200, '2020-01-17 07:21:48', '2020-01-17 07:21:48');
 
 -- --------------------------------------------------------
 
@@ -168,7 +187,7 @@ ALTER TABLE `detail_transaksi`
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indexes for table `migrations`
@@ -203,7 +222,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `detail_transaksi`
@@ -215,7 +234,7 @@ ALTER TABLE `detail_transaksi`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -227,7 +246,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `stok`
 --
 ALTER TABLE `stok`
-  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
