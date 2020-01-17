@@ -20,7 +20,8 @@
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}" defer></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}" defer></script>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="{{asset('js/app.js')}}" ></script>
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sb-admin-2.css') }}">

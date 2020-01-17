@@ -58,7 +58,8 @@ class PemilikController extends Controller
      */
     public function edit($id)
     {
-        return $id;
+        $kategori = CategoryModel::find($id);
+
     }
 
     /**
@@ -116,14 +117,14 @@ class PemilikController extends Controller
         $this->validate($request,[
     		'nama_kategori' => 'required'
         ]);
-        
+
         CategoryModel::create([
     		'nama_kategori' => $request->nama_kategori
         ]);
-        
+
         return redirect('/kategori_pemilik')->with('success', ' ');
     }
-    
+
 
     // /**
     //  * Show the form for editing the specified resource.

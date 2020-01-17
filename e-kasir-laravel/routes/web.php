@@ -31,8 +31,8 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
     Route::post('/tambah_kategori', 'PemilikController@tambah_kategori');
+    Route::get('/kategori_pemilik/edit/{id}', 'PemilikController@edit'); // edit kategori
     Route::post('/kategori_pemilik/hapus', 'PemilikController@destroy'); //Untuk Hapus Kategori
-    Route::get('/kategori_pemilik/edit/{id}', 'PemilikController@edit'); 
 });
 
 
