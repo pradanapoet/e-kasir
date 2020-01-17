@@ -15,7 +15,7 @@
         if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;
         return true;
-    }    
+    }
 </script>
 
 <h1>Iki halaman stok barang</h1>
@@ -194,7 +194,7 @@
                             <div class="form-group">
                                 <input type="text" onkeypress="return validate(event)" id="modal-input-harga_jual" name="harga_jual" class="form-control" placeholder="Harga Jual">
                             </div>
-                            
+
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
@@ -214,7 +214,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-dark">
-                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-book-open"> </i><b>Edit Stok</b></h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-book-open"> </i><b>Detail Stok</b></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -236,7 +236,7 @@
                             <input type="text" id="modal-show-harga_beli" name="hara_beli" class="form-control" readonly>
                             <label for="exampleFormControlSelect1">Harga Jual :</label>
                             <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
-                            
+
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
@@ -299,7 +299,7 @@
   });
 
 
-    
+
 })
 </script>
 
@@ -354,7 +354,7 @@
   });
 
 
-    
+
 })
 </script>
 @endsection
