@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\CategoryModel;
 
 class PemilikController extends Controller
 {
@@ -58,7 +57,7 @@ class PemilikController extends Controller
      */
     public function edit($id)
     {
-        $kategori = CategoryModel::find($id);
+       //
 
     }
 
@@ -74,32 +73,32 @@ class PemilikController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        $id = $request->input('id');
-        CategoryModel::destroy($id);
-        return redirect('/kategori_pemilik')->with('fail', ' ');
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(Request $request)
+    // {
+    //     $id = $request->input('id');
+    //     CategoryModel::destroy($id);
+    //     return redirect('/kategori_pemilik')->with('fail', ' ');
+    // }
 
-    public function kategori()
-    {
-        $kategori = CategoryModel::all();
-        return view('fol-join.category',compact('kategori'));
-    }
-    public function listbarang()
-    {
-        return view('fol-join.list_item');
-    }
-    public function liststok()
-    {
-        return view('fol-join.list_stock_item');
-    }
+    // public function kategori()
+    // {
+    //     $kategori = CategoryModel::all();
+    //     return view('fol-join.category',compact('kategori'));
+    // }
+    // public function listbarang()
+    // {
+    //     return view('fol-join.list_item');
+    // }
+    // public function liststok()
+    // {
+    //     return view('fol-join.list_stock_item');
+    // }
     public function laporan_penjualan()
     {
         return view('fol-join.selling_report');
@@ -112,18 +111,18 @@ class PemilikController extends Controller
     {
         return view('fol-join.item_report');
     }
-    public function tambah_kategori(Request $request)
-    {
-        $this->validate($request,[
-    		'nama_kategori' => 'required'
-        ]);
+    // public function tambah_kategori(Request $request)
+    // {
+    //     $this->validate($request,[
+    // 		'nama_kategori' => 'required'
+    //     ]);
 
-        CategoryModel::create([
-    		'nama_kategori' => $request->nama_kategori
-        ]);
+    //     CategoryModel::create([
+    // 		'nama_kategori' => $request->nama_kategori
+    //     ]);
 
-        return redirect('/kategori_pemilik')->with('success', ' ');
-    }
+    //     return redirect('/kategori_pemilik')->with('success', ' ');
+    // }
 
 
     // /**

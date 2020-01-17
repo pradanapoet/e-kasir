@@ -12,15 +12,14 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery-3.4.1.min.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.js') }}" defer></script>
-    <script src="{{ asset('js/sb-admin-2.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}" defer></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}" defer></script>
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{asset('js/app.js')}}" ></script>
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">

@@ -32,6 +32,13 @@
                     </div>
                 @endif
 
+                @if (Session::get('success_update'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Yuhuu!</strong> Kategori Terpilih Berhasil Update.
+                    </div>
+                @endif
+
                 @if (Session::get('fail'))
                     <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -53,11 +60,10 @@
                         <th scope="col">{{ $loop->iteration }}</th>
                         <td class="align-middle kategori" id="nama">{{ $kat->nama_kategori }}</td>
                         <td>
-                        {{-- <a href="/kategori_pemilik/edit/{{ $kat->id }}" class="badge badge-info my-2 d-inline">Detail</a> --}}
-                        <button type="button" class="btn btn-success" id="edit-item" data-item-id="{{$kat->id_kategori}}" data-item-nama="{{$kat->nama_kategori}}">edit</button>
+                        <button type="button" class="badge badge-info" id="edit-item" data-item-id="{{$kat->id_kategori}}" data-item-nama="{{$kat->nama_kategori}}">edit</button>
                         <form action="/kategori_pemilik/hapus" method="post" class="d-inline">
                             @csrf
-                            <input type="hidden" value="{{$kat->id}}" class="form-control" name="id">
+                            <input type="hidden" value="{{$kat->id_kategori}}" class="form-control" name="id">
                             <button type="submit" class="badge badge-danger">Hapus</button>
                         </form>
                         </td>
@@ -96,9 +102,10 @@
         </div>
         <!-- Modal Tambah Buku -->
 
-        {{-- <!-- Modal Edit Buku -->
-        <div class="modal fade modal-edit-kategori" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog ">
+        <!-- Attachment Modal -->
+
+        <div class="modal fade" id="edit-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-dark">
                         <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-book-open"> </i><b>Edit Kategori</b></h5>
@@ -107,12 +114,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/tambah_kategori" method="post" enctype="multipart/form-data">
+                        <form action="/kategori_pemilik/update" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                {{-- <label><i class="fas fa-book text-dark"></i>Nama Kategori</label> --}}
-                                {{-- {{ dump($kat) }};
-                                <input type="text" name="nama_kategori" class="form-control" placeholder="{{ $kat->nama_kategori }}">
+                                <input type="hidden" name="id" id="modal-input-id" class="form-control">
+                                <input type="text" name="nama_kategori" id="modal-input-name" class="form-control" placeholder="Nama Kategori">
                             </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
@@ -124,48 +130,6 @@
                 </div>
             </div>
         </div>
-        <!-- Modal Edit Buku --> --}} --}}
-
-        <!-- Attachment Modal -->
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="edit-modal-label">Edit Data</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="attachment-body-content">
-          <form id="edit-form" class="form-horizontal" method="POST" action="">
-            <div class="card text-white bg-dark mb-0">
-              <div class="card-header">
-                <h2 class="m-0">Edit</h2>
-              </div>
-              <div class="card-body">
-                <!-- id -->
-                <div class="form-group">
-                  <label class="col-form-label" for="modal-input-id">Id (just for reference not meant to be shown to the general public) </label>
-                  <input type="text" name="modal-input-id" class="form-control" id="modal-input-id" required>
-                </div>
-                <!-- /id -->
-                <!-- name -->
-                <div class="form-group">
-                  <label class="col-form-label" for="modal-input-name">Name</label>
-                  <input type="text" name="modal-input-name" class="form-control" id="modal-input-name" required autofocus>
-                </div>
-                <!-- /name -->
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /Attachment Modal -->
         </div>
     </div>
 <script>
