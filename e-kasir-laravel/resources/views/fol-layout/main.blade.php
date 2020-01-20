@@ -20,7 +20,7 @@
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{asset('js/app.js')}}" ></script>
+    <script src="{{ asset('js/app.js' )}}" ></script>
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sb-admin-2.css') }}">
@@ -119,7 +119,7 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/pos">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Menu Kasir</span>
                 </a>

@@ -54,3 +54,11 @@ Route::group(['middleware' => ['auth','checkRole:kasir']],function(){
     Route::get('/lap_barang_kasir', 'KasirController@laporan_barang');
 
 });
+
+
+//Kasir dan Pemilik
+Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
+
+    Route::get('/pos', 'POSController@index');
+
+});

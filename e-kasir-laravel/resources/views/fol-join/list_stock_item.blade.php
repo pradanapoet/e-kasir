@@ -92,7 +92,7 @@
         </div>
 
         <!-- Modal Tambah Stok -->
-        <div class="modal fade modal-tambah-barang" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade modal-tambah-barang" id="modal-tambah" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-dark">
@@ -135,7 +135,7 @@
                             </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                                <button type="reset" class="btn btn-danger btn-sm" id="tambah-item" value="Reset">Reset</button>
                                 <input type="submit" value="Simpan" class="btn btn-primary btn-sm">
                             </div>
                         </form>
@@ -295,7 +295,7 @@
   // on modal hide
   $('#edit-modal').on('hide.bs.modal', function() {
     $('.detail-item-trigger-clicked').removeClass('detail-item-trigger-clicked')
-    $("#detail-form").trigger("reset");
+    $("#edit-modal").trigger("reset");
   });
 
 

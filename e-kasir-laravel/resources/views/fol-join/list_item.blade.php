@@ -77,7 +77,7 @@
             </table>
         </div>
 
-        <!-- Modal Tambah Buku -->
+        <!-- Modal Tambah list -->
         <div class="modal fade modal-tambah-barang" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -106,7 +106,7 @@
                             </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                                <button type="reset" class="btn btn-danger btn-sm" id="tambah-item" value="Reset">Reset</button>
                                 <input type="submit" value="Simpan" class="btn btn-primary btn-sm">
                             </div>
                         </form>
