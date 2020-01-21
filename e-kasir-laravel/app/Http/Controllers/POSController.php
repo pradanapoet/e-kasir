@@ -84,4 +84,69 @@ class POSController extends Controller
     {
         //
     }
+
+    public function addToCart($id)
+    {
+        $product = POSModel::find($id);
+
+        if(!$product) {
+
+            abort(404);
+
+        }
+
+        $cart = session()->get('cart');
+
+        // if cart is empty then this the first product
+        if(!$cart) {
+
+            $cart = [
+                $id => [
+                    "nama" => $product->id_stok,
+                    "kuantitas" => 1,
+                    "harga" => $product->harga_jual,
+                    "kadaluarsa" => $product->tanggal_kadaluarsa
+                ]
+            ];
+
+            session()->put('cart', $cart);
+
+            $htmlCart = view('fol-join.pos')->render();
+
+            return response()->json(['data' => $htmlCart]);
+
+            //return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+
+            $cart[$id]['quantity']++;
+
+            session()->put('cart', $cart);
+
+            $htmlCart = view('fol-join.pos')->render();
+
+            return response()->json(['data' => $htmlCart]);
+
+            //return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+        }
+
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "nama" => $product->id_stok,
+            "kuantitas" => 1,
+            "harga" => $product->harga_jual,
+            "kadaluarsa" => $product->tanggal_kadaluarsa
+        ];
+
+        session()->put('cart', $cart);
+
+        $htmlCart = view('fol-join.pos')->render();
+
+        return response()->json(['data' => $htmlCart]);
+
+        //return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
 }
