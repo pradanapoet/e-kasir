@@ -14,7 +14,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.js') }}" defer></script>
-    <script src="{{ asset('js//sb-admin-2.min.js') }}" defer></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}" defer></script>
 
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
@@ -42,14 +42,14 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    
+
                                     <form method="POST" action="/postlogin">
                                         @csrf
 
                                         <!--Email-->
                                         <div class="form-group">
                                             <input id="username" type="text" class="form-control form-control-user @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required placeholder="Enter Username"  autofocus>
-                                        
+
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
 
                                         <div class="form-group">
                                             <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" id="exampleInputPassword" placeholder="Password">
-                                        
+
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -115,7 +115,7 @@
 
     </div>
 
-    
+
 
 </body>
 

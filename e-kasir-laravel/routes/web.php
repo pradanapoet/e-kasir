@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
-Route::get('/login', 'AuthController@login')->name('login');
+Route::get('/', 'AuthController@login')->name('login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
 // Route::get('/pemilik/dashboard', 'PemilikController@index');
@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
     Route::get('/lap_penjualan_pemilik', 'PemilikController@laporan_penjualan');
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
-    
+
 });
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\POSModel;
 use Illuminate\Http\Request;
+use DB;
 
 class POSController extends Controller
 {
@@ -14,7 +15,8 @@ class POSController extends Controller
      */
     public function index()
     {
-        return view('fol-join.pos');
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
+        return view('fol-join.pos',compact('stok'));
     }
 
     /**

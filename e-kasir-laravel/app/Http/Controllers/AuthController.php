@@ -15,21 +15,21 @@ class AuthController extends Controller
     public function postlogin(Request $request){
         // dd($request->all());
         if(Auth::attempt($request->only('username','password'))){
-            
+
             if( $request->user()->role == 'pemilik' ){
                 return redirect('/pemilik');
             }else{
                 return redirect('/kasir');
             }
-            
+
         }
 
-        return redirect('/login')->with('alert', 'Username atau Password Salah!');
+        return redirect('/')->with('alert', 'Username atau Password Salah!');
     }
 
     public function logout(){
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
     // public function cek(Request $request){
