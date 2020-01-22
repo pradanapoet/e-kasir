@@ -87,7 +87,7 @@ class POSController extends Controller
 
     public function addToCart($id)
     {
-        $product = POSModel::find($id);
+        $product = StokModel::find($id);
 
         if(!$product) {
 
@@ -111,7 +111,7 @@ class POSController extends Controller
 
             session()->put('cart', $cart);
 
-            $htmlCart = view('fol-join.pos')->render();
+            $htmlCart = view('fol-layout.main')->render();
 
             return response()->json(['data' => $htmlCart]);
 
@@ -147,6 +147,6 @@ class POSController extends Controller
 
         return response()->json(['data' => $htmlCart]);
 
-        //return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 }

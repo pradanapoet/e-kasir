@@ -91,18 +91,21 @@
                         <form action="/tambah_barang" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <input type="text" name="nama_barang" class="form-control" placeholder="Nama Barang">
+                                <label for="exampleFormControlSelect1">Nama Barang</label>
+                                <input type="text" name="nama_barang" class="form-control" placeholder=". . .">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Kategori Barang</label>
                                 <select class="form-control" id="id_kategori" name="id_kategori">
+                                    <option value="">== Pilih Kategori ==</option>
                                     @foreach ($kategori as $kat)
                                     <option value="{{$kat->id_kategori}}">{{$kat->nama_kategori}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="keterangan" class="form-control" placeholder="Keterangan">
+                                <label for="exampleFormControlSelect1">Keterangan</label>
+                                <input type="text" name="keterangan" class="form-control" placeholder=". . .">
                             </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
@@ -132,17 +135,20 @@
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" name="id_barang" id="modal-input-id_barang" class="form-control">
+                                <label for="exampleFormControlSelect1">Nama Barang</label>
                                 <input type="text" name="nama_barang" id="modal-input-nama_barang" class="form-control" placeholder="Nama Barang">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Kategori Barang</label>
                                 <select class="form-control" id="modal-input-id_kategori" name="id_kategori">
+                                    <option value="">== Pilih Kategori ==</option>
                                     @foreach ($kategori as $kat)
                                     <option value="{{$kat->id_kategori}}">{{$kat->nama_kategori}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="exampleFormControlSelect1">Keterangan</label>
                                 <input type="text" name="keterangan" id="modal-input-keterangan" class="form-control" placeholder="Keterangan">
                             </div>
                             <!-- Perlu Edit Posisi Modal Footer -->

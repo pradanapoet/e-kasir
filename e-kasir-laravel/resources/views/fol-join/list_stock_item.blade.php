@@ -105,34 +105,40 @@
                         <form action="/tambah_stok" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Barang :</label>
+                                <label for="exampleFormControlSelect1">Barang</label>
                                 <select class="form-control" id="id_barang" name="id_barang">
+                                    <option value="">Pilih Barang</option>
                                     @foreach ($barang as $brg)
                                     <option value="{{$brg->id_barang}}">{{$brg->nama_barang}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group row">
-                                <label for="example-date-input" class="col-2 col-form-label">Tanggal Masuk</label>
-                                <div class="col-10">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="example-date-input">Tanggal Masuk</label>
                                     <input class="form-control" type="date" id="tanggal_masuk" name="tanggal_masuk">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-date-input" class="col-2 col-form-label">Tanggal Kadaluarsa</label>
-                                <div class="col-10">
+                                <div class="form-group">
+                                    <label for="example-date-input">Tanggal Kadaluarsa</label>
                                     <input class="form-control" type="date" id="tanggal_kadaluarsa" name="tanggal_kadaluarsa">
                                 </div>
+                                <div class="form-group">
+                                    <label for="example-date-input">Jumah Stok</label>
+                                    <input type="text" onkeypress="return validate(event)" name="jumlah_stok_masuk" class="form-control" placeholder="Jumlah Stok">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" name="jumlah_stok_masuk" class="form-control" placeholder="Jumlah Stok">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="example-date-input">Harga Beli</label>
+                                    <input type="text" onkeypress="return validate(event)" name="harga_beli" class="form-control" placeholder="Harga Beli">
+                                </div>
+                                <div class="form-group">
+                                    <label for="example-date-input">Harga Jual</label>
+                                    <input type="text" onkeypress="return validate(event)" name="harga_jual" class="form-control" placeholder="Harga Jual">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" name="harga_beli" class="form-control" placeholder="Harga Beli">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" name="harga_jual" class="form-control" placeholder="Harga Jual">
-                            </div>
+                        </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-danger btn-sm" id="tambah-item" value="Reset">Reset</button>
@@ -158,43 +164,48 @@
                     </div>
                     <div class="modal-body">
                         <form action="/liststok_pemilik/update" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <input type="hidden" name="id_stok" id="modal-input-id_stok" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Barang :</label>
-                                <select class="form-control" id="modal-input-id_barang" name="id_barang">
-                                    @foreach ($barang as $brg)
-                                    <option value="{{$brg->id_barang}}">{{$brg->nama_barang}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-date-input" class="col-2 col-form-label">Tanggal Masuk</label>
-                                <div class="col-10">
+                        @csrf
+                        <div class="form-group">
+                            <input type="hidden" name="id_stok" id="modal-input-id_stok" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Barang</label>
+                            <select class="form-control" id="modal-input-id_barang" name="id_barang">
+                                @foreach ($barang as $brg)
+                                <option value="{{$brg->id_barang}}">{{$brg->nama_barang}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="example-date-input">Tanggal Masuk</label>
                                     <input class="form-control" type="date" id="modal-input-tanggal_masuk" name="tanggal_masuk">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-date-input" class="col-2 col-form-label">Tanggal Kadaluarsa</label>
-                                <div class="col-10">
+                                <div class="form-group">
+                                    <label for="example-date-input">Tanggal Kadaluarsa</label>
                                     <input class="form-control" type="date" id="modal-input-tanggal_kadaluarsa" name="tanggal_kadaluarsa">
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Jumlah Stok Masuk</label>
+                                    <input type="text" onkeypress="return validate(event)" id="modal-input-jumlah_stok" name="jumlah_stok_masuk" class="form-control" placeholder="Jumlah Stok">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" id="modal-input-jumlah_stok" name="jumlah_stok_masuk" class="form-control" placeholder="Jumlah Stok">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Sisa Stok</label>
+                                    <input type="text" onkeypress="return validate(event)" id="modal-input-sisa_stok" name="sisa_stok" class="form-control" placeholder="Sisa Stok">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Harga Beli</label>
+                                    <input type="text" onkeypress="return validate(event)" id="modal-input-harga_beli" name="harga_beli" class="form-control" placeholder="Harga Beli">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Harga Jual</label>
+                                    <input type="text" onkeypress="return validate(event)" id="modal-input-harga_jual" name="harga_jual" class="form-control" placeholder="Harga Jual">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" id="modal-input-sisa_stok" name="sisa_stok" class="form-control" placeholder="Sisa Stok">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" id="modal-input-harga_beli" name="harga_beli" class="form-control" placeholder="Harga Beli">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" onkeypress="return validate(event)" id="modal-input-harga_jual" name="harga_jual" class="form-control" placeholder="Harga Jual">
-                            </div>
-
+                        </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
@@ -220,23 +231,28 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                            <label for="exampleFormControlSelect1">Id Stok :</label>
-                            <input type="text" id="modal-show-id_stok" name="id_barang" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Id Barang :</label>
-                            <input type="text" id="modal-show-id_barang" name="id_barang" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Tanggal Masuk :</label>
-                            <input type="text" id="modal-show-tanggal_masuk" name="tanggal_masuk" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Tanggal Kadaluarsa :</label>
-                            <input type="text" id="modal-show-tanggal_kadaluarsa" name="tanggal_kadaluarsa" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Jumlah Stok :</label>
-                            <input type="text" id="modal-show-jumlah_stok" name="jumlah_stok" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Sisa Stok :</label>
-                            <input type="text" id="modal-show-sisa_stok" name="sisa_stok" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Harga Beli :</label>
-                            <input type="text" id="modal-show-harga_beli" name="hara_beli" class="form-control" readonly>
-                            <label for="exampleFormControlSelect1">Harga Jual :</label>
-                            <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
-
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="exampleFormControlSelect1">Id Stok :</label>
+                                <input type="text" id="modal-show-id_stok" name="id_barang" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Id Barang :</label>
+                                <input type="text" id="modal-show-id_barang" name="id_barang" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Tanggal Masuk :</label>
+                                <input type="text" id="modal-show-tanggal_masuk" name="tanggal_masuk" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Tanggal Kadaluarsa :</label>
+                                <input type="text" id="modal-show-tanggal_kadaluarsa" name="tanggal_kadaluarsa" class="form-control" readonly>
+                            </div>
+                            <div class="col-6">
+                                <label for="exampleFormControlSelect1">Jumlah Stok :</label>
+                                <input type="text" id="modal-show-jumlah_stok" name="jumlah_stok" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Sisa Stok :</label>
+                                <input type="text" id="modal-show-sisa_stok" name="sisa_stok" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Harga Beli :</label>
+                                <input type="text" id="modal-show-harga_beli" name="hara_beli" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Harga Jual :</label>
+                                <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
+                            </div>
+                        </div>
                             <!-- Perlu Edit Posisi Modal Footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
