@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\POSModel;
+use App\StokModel;
 use Illuminate\Http\Request;
 use DB;
 
@@ -114,21 +115,21 @@ class POSController extends Controller
             $htmlCart = view('fol-layout.main')->render();
 
             return response()->json(['data' => $htmlCart]);
-
+            return redirect('/pos');
             //return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
 
         // if cart not empty then check if this product exist then increment quantity
         if(isset($cart[$id])) {
 
-            $cart[$id]['quantity']++;
+            $cart[$id]['kuantitas']++;
 
             session()->put('cart', $cart);
 
-            $htmlCart = view('fol-join.pos')->render();
+            $htmlCart = view('fol-layout.main')->render();
 
             return response()->json(['data' => $htmlCart]);
-
+            return redirect('/pos');
             //return redirect()->back()->with('success', 'Product added to cart successfully!');
 
         }
@@ -143,10 +144,10 @@ class POSController extends Controller
 
         session()->put('cart', $cart);
 
-        $htmlCart = view('fol-join.pos')->render();
+        $htmlCart = view('fol-layout.main')->render();
 
         return response()->json(['data' => $htmlCart]);
 
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect('/pos');
     }
 }
