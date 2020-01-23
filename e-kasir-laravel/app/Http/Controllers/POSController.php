@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\POSModel;
+use App\BarangModel;
 use App\StokModel;
 use Illuminate\Http\Request;
 use DB;
+use App\Post;
 
 class POSController extends Controller
 {
@@ -88,8 +90,10 @@ class POSController extends Controller
 
     public function addToCart($id)
     {
-        $product = StokModel::find($id);
+        // $product = DB::table('stok')->get();
 
+        $product = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->where('id_stok',$id)->get();
+        // dd($product);
         if(!$product) {
 
             abort(404);
@@ -100,13 +104,13 @@ class POSController extends Controller
 
         // if cart is empty then this the first product
         if(!$cart) {
-
             $cart = [
                 $id => [
-                    "nama" => $product->id_stok,
+                    "nama" => $product[0]->nama_barang,
                     "kuantitas" => 1,
-                    "harga" => $product->harga_jual,
-                    "kadaluarsa" => $product->tanggal_kadaluarsa
+                    "harga" => $product[0]->harga_jual,
+                    "kadaluarsa" => $product[0]->tanggal_kadaluarsa
+
                 ]
             ];
 
@@ -117,7 +121,7 @@ class POSController extends Controller
             return response()->json(['data' => $htmlCart]);
             return redirect('/pos');
             //return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
+    }
 
         // if cart not empty then check if this product exist then increment quantity
         if(isset($cart[$id])) {
@@ -136,10 +140,10 @@ class POSController extends Controller
 
         // if item not exist in cart then add to cart with quantity = 1
         $cart[$id] = [
-            "nama" => $product->id_stok,
+            "nama" => $product[0]->nama_barang,
             "kuantitas" => 1,
-            "harga" => $product->harga_jual,
-            "kadaluarsa" => $product->tanggal_kadaluarsa
+            "harga" => $product[0]->harga_jual,
+            "kadaluarsa" => $product[0]->tanggal_kadaluarsa
         ];
 
         session()->put('cart', $cart);
@@ -149,5 +153,6 @@ class POSController extends Controller
         return response()->json(['data' => $htmlCart]);
 
         return redirect('/pos');
-    }
+        
+        }
 }

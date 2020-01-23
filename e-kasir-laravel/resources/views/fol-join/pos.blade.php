@@ -16,9 +16,10 @@ Halaman POS Boss
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
                 <tr>
+                    <th style="width: 10px;">#</th>
                     <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Quantity</th>
                     <th class="text-center">Subtotal</th>
                     <th></th>
                 </tr>
@@ -33,22 +34,12 @@ Halaman POS Boss
                         <?php $total += $details['harga'] * $details['kuantitas'] ?>
 
                         <tr>
-                            <td data-th="Product">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        Foto
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4 class="nomargin">{{ $details['nama'] }}</h4>
-                                    </div>
-                                </div>
-                            </td>
-                            <td data-th="Price">${{ $details['harga'] }}</td>
-                            <td data-th="Quantity">
-                                <input type="number" value="{{ $details['kuantitas'] }}" class="form-control quantity" />
-                            </td>
-                            <td data-th="Subtotal" class="text-center">$<span class="product-subtotal">{{ $details['harga'] * $details['kuantitas'] }}</span></td>
-                            <td class="actions" data-th="">
+                            <th style="width: 10px;" scope="col">{{ $loop->iteration }}</th>
+                            <td data-th="Product">{{ $details['nama'] }}</td>
+                            <td class="text-center" data-th="Price">Rp.{{ $details['harga'] }},-</td>
+                            <td class="text-center" data-th="Quantity">{{ $details['kuantitas'] }}</td>
+                            <td class="text-center" data-th="Subtotal" class="text-center">Rp.<span class="product-subtotal">{{ $details['harga'] * $details['kuantitas'] }},-</span></td>
+                            <td class="text-center" class="actions" data-th="">
                                 <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}"><i class="fa fa-refresh"></i></button>
                                 <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
                                 <i class="fa fa-circle-o-notch fa-spin btn-loading" style="font-size:24px; display: none"></i>
@@ -59,13 +50,11 @@ Halaman POS Boss
 
                 </tbody>
                 <tfoot>
-                <tr class="visible-xs">
-                    <td class="text-center"><strong>Total $<span class="cart-total">{{ $total }}</span></strong></td>
-                </tr>
                 <tr>
                     <td><a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                     <td colspan="2" class="hidden-xs"></td>
-                    <td class="hidden-xs text-center"><strong>Total $<span class="cart-total">{{ $total }}</span></strong></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total Rp.<span class="cart-total">{{ $total }}</span></strong></td>
                 </tr>
                 </tfoot>
             </table>
@@ -96,8 +85,9 @@ Halaman POS Boss
                     <td>
                     {{-- <button type="button" href="javascript:void(0);" class="badge badge-secondary add-to-cart" data-item-id_stok="{{$stok->id_stok}}">Tambah<i class="fa fa-circle-o-notch fa-spin btn-loading" style="font-size:24px; display: none"></i></button> --}}
                     <p class="btn-holder"><a href="javascript:void(0);" data-item-id_stok="{{ $stok->id_stok }}" class="btn btn-warning btn-block text-center add-to-cart" role="button">Add to cart</a>
-                        <i class="fa fa-circle-o-notch fa-spin btn-loading" style="font-size:24px; display: none">jancok</i>
+                        <i class="fa fa-circle-o-notch fa-spin btn-loading" style="font-size:24px; display: none">Jalan</i>
                     </p>
+                    <a class="button btn-secondary" href="add-to-cart/{{ $stok->id_stok }}">Add To Cart 2</a>
                     {{-- data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}" --}}
                     </td>
                 </tr>
@@ -124,7 +114,6 @@ Halaman POS Boss
                 data: {_token: '{{ csrf_token() }}'},
                 dataType: "json",
                 success: function (response) {
-                    //console.log("cok");
                     ele.siblings('.btn-loading').hide();
                     $("span#status").html('<div class="alert alert-success">'+'js sukses '+'</div>');
                     $("#header-bar").html(response.data);
