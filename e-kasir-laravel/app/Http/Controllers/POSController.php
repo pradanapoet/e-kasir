@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\POSModel;
 use App\BarangModel;
 use App\StokModel;
@@ -42,9 +43,7 @@ class POSController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $data = request()->except(['_token']);
-        // $data=$request->all();
         $lastid=TransaksiModel::create($data)->id_transaksi;
         if(count($request->nama) > 0)
         {
@@ -59,7 +58,8 @@ class POSController extends Controller
         DetailTransaksiModel::insert($data2);
       }
         }
-        return redirect()->back()->with('success','data insert successfully');
+        $request->session()->forget('cart');
+        return redirect('/pos')->with('success_transaksi', ' ');
     }
 
     /**

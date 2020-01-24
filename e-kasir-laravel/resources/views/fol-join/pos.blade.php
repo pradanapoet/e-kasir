@@ -7,6 +7,13 @@
 @endsection
 
 @section('content')
+
+@if (Session::get('success_transaksi'))
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Yuhuu!</strong> Transaksi Berhasil Ditambahkan.
+</div>
+@endif
 <span id="status"></span>
 Halaman POS Boss
 <div class="container">
@@ -36,10 +43,10 @@ Halaman POS Boss
 
                         <tr>
                             <th style="width: 10px;" scope="col">{{ $loop->iteration }}</th>
-                        <td data-th="Product" name="nama[]" value="{{ $details['id_stok']}}">{{ $details['nama'] }}</td>
-                            <td class="text-center" data-th="Price" name="harga[]" value="{{ $details['harga']}}">Rp.{{ $details['harga'] }},-</td>
-                            <td class="text-center" data-th="Quantity" name="jumlah[]" value="{{ $details['kuantitas']}}">{{ $details['kuantitas'] }}</td>
-                            <td class="text-center" data-th="Subtotal" class="text-center">Rp.<span class="product-subtotal" name="subtotal[]" value="{{ $details['harga'] * $details['kuantitas'] }}">{{ $details['harga'] * $details['kuantitas'] }},-</span></td>
+                            <td data-th="Product">{{ $details['nama'] }}<input type="hidden" name="nama[]" value="{{ $details['id_stok']}}"></td>
+                            <td class="text-center" data-th="Price">Rp.{{ $details['harga'] }},-<input type="hidden" name="harga[]" value="{{ $details['harga']}}"></td>
+                            <td class="text-center" data-th="Quantity">{{ $details['kuantitas'] }}<input type="hidden" name="jumlah[]" value="{{ $details['kuantitas']}}"></td>
+                            <td class="text-center" data-th="Subtotal" class="text-center">Rp.<span class="product-subtotal" name="subtotal[]" value="{{ $details['harga'] * $details['kuantitas'] }}">{{ $details['harga'] * $details['kuantitas'] }},-</span><input type="hidden" name="subtotal[]" value="{{ $details['harga'] * $details['kuantitas'] }}"></td>
                             <td class="text-center" class="actions" data-th="">
                                 {{-- <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}"><i class="fa fa-refresh"></i></button>
                                 <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button> --}}
@@ -54,7 +61,7 @@ Halaman POS Boss
                 <tr>
                     <td colspan="2" class="hidden-xs"></td>
                     <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center" name="total[]" value="{{ $total }}"><strong>Total Rp.<span class="cart-total">{{ $total }}</span></strong></td>
+                <td class="hidden-xs text-center"><strong>Total Rp.<span class="cart-total">{{ $total }}</span></strong><input type="hidden" name="total" value="{{ $total }}"></td>
                 </tr>
                 </tfoot>
             </table>
