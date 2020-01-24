@@ -12,7 +12,8 @@ Halaman POS Boss
 <div class="container">
     <div class="card">
         <div class="container">
-
+            <form action="/pos/store" method="POST">
+             @csrf
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
                 <tr>
@@ -35,13 +36,13 @@ Halaman POS Boss
 
                         <tr>
                             <th style="width: 10px;" scope="col">{{ $loop->iteration }}</th>
-                            <td data-th="Product">{{ $details['nama'] }}</td>
-                            <td class="text-center" data-th="Price">Rp.{{ $details['harga'] }},-</td>
-                            <td class="text-center" data-th="Quantity">{{ $details['kuantitas'] }}</td>
-                            <td class="text-center" data-th="Subtotal" class="text-center">Rp.<span class="product-subtotal">{{ $details['harga'] * $details['kuantitas'] }},-</span></td>
+                        <td data-th="Product" name="nama[]" value="{{ $details['id_stok']}}">{{ $details['nama'] }}</td>
+                            <td class="text-center" data-th="Price" name="harga[]" value="{{ $details['harga']}}">Rp.{{ $details['harga'] }},-</td>
+                            <td class="text-center" data-th="Quantity" name="jumlah[]" value="{{ $details['kuantitas']}}">{{ $details['kuantitas'] }}</td>
+                            <td class="text-center" data-th="Subtotal" class="text-center">Rp.<span class="product-subtotal" name="subtotal[]" value="{{ $details['harga'] * $details['kuantitas'] }}">{{ $details['harga'] * $details['kuantitas'] }},-</span></td>
                             <td class="text-center" class="actions" data-th="">
-                                <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}"><i class="fa fa-refresh"></i></button>
-                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
+                                {{-- <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}"><i class="fa fa-refresh"></i></button>
+                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button> --}}
                                 <i class="fa fa-circle-o-notch fa-spin btn-loading" style="font-size:24px; display: none"></i>
                             </td>
                         </tr>
@@ -51,13 +52,14 @@ Halaman POS Boss
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td><a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                     <td colspan="2" class="hidden-xs"></td>
                     <td colspan="2" class="hidden-xs"></td>
-                    <td class="hidden-xs text-center"><strong>Total Rp.<span class="cart-total">{{ $total }}</span></strong></td>
+                <td class="hidden-xs text-center" name="total[]" value="{{ $total }}"><strong>Total Rp.<span class="cart-total">{{ $total }}</span></strong></td>
                 </tr>
                 </tfoot>
             </table>
+            <button class="btn btn-primary" type="submit">Uwuk Slur</button>
+            </form>
         </div>
     </div>
     <div class="card">

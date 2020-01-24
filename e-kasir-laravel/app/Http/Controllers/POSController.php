@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\POSModel;
 use App\BarangModel;
 use App\StokModel;
+use App\TransaksiModel;
+use App\DetailTransaksiModel;
 use Illuminate\Http\Request;
 use DB;
 use App\Post;
@@ -40,7 +42,24 @@ class POSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        $data = request()->except(['_token']);
+        // $data=$request->all();
+        $lastid=TransaksiModel::create($data)->id_transaksi;
+        if(count($request->nama) > 0)
+        {
+        foreach($request->nama as $item=>$v){
+            $data2=array(
+                'id_transaksi'=>$lastid,
+                'id_stok'=>$request->nama[$item],
+                'harga'=>$request->harga[$item],
+                'jumlah'=>$request->jumlah[$item],
+                'subtotal'=>$request->subtotal[$item]
+            );
+        DetailTransaksiModel::insert($data2);
+      }
+        }
+        return redirect()->back()->with('success','data insert successfully');
     }
 
     /**
@@ -106,6 +125,7 @@ class POSController extends Controller
         if(!$cart) {
             $cart = [
                 $id => [
+                    "id_stok" => $product[0]->id_stok,
                     "nama" => $product[0]->nama_barang,
                     "kuantitas" => 1,
                     "harga" => $product[0]->harga_jual,
@@ -140,6 +160,7 @@ class POSController extends Controller
 
         // if item not exist in cart then add to cart with quantity = 1
         $cart[$id] = [
+            "id_stok" => $product[0]->id_stok,
             "nama" => $product[0]->nama_barang,
             "kuantitas" => 1,
             "harga" => $product[0]->harga_jual,
@@ -153,6 +174,6 @@ class POSController extends Controller
         return response()->json(['data' => $htmlCart]);
 
         return redirect('/pos');
-        
+
         }
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2020 at 04:17 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Jan 24, 2020 at 11:04 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,8 +32,8 @@ CREATE TABLE `barang` (
   `id_barang` int(11) NOT NULL,
   `id_kategori` int(11) DEFAULT NULL,
   `nama_barang` varchar(100) DEFAULT NULL,
-  `keterangan` text,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `keterangan` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -56,7 +56,10 @@ CREATE TABLE `detail_transaksi` (
   `id_transaksi` int(11) NOT NULL,
   `id_stok` int(11) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `total` int(11) DEFAULT NULL
+  `harga` int(11) NOT NULL,
+  `subtotal` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,7 +71,7 @@ CREATE TABLE `detail_transaksi` (
 CREATE TABLE `kategori` (
   `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(100) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -116,7 +119,7 @@ CREATE TABLE `stok` (
   `sisa_stok` int(11) DEFAULT NULL,
   `harga_beli` int(11) DEFAULT NULL,
   `harga_jual` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -136,10 +139,18 @@ INSERT INTO `stok` (`id_stok`, `id_barang`, `jumlah_stok_masuk`, `tanggal_masuk`
 
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
   `tgl` date DEFAULT NULL,
-  `total` int(11) DEFAULT NULL
+  `total` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `tgl`, `total`, `updated_at`, `created_at`) VALUES
+(1, NULL, NULL, '2020-01-24 02:59:26', '2020-01-24 02:59:26');
 
 -- --------------------------------------------------------
 
@@ -164,7 +175,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Pradana Poet', 'pemilik', 'pemilik', NULL, '$2y$10$10aVNpyEFsAn1BhrHFXys.XopUlIY8HDr1SKNoSz/u9ey2aNIyyAG', 'NpT34iQfGLR5f5OKQyYzy5OB6BPU9cwaiTTPZL1ntw5RDCIB3s9GRA4eX2e2', '2020-01-08 21:42:20', '2020-01-08 21:42:20'),
+(2, 'Pradana Poet', 'pemilik', 'pemilik', NULL, '$2y$10$10aVNpyEFsAn1BhrHFXys.XopUlIY8HDr1SKNoSz/u9ey2aNIyyAG', 'eN4gWznRe6F5WdId4okgajiYnXktlS9mInRWJMAY4eQr6cbx4mPt68x3AgV6', '2020-01-08 21:42:20', '2020-01-08 21:42:20'),
 (3, 'Alfin Khoiri', 'kasir', 'kasir', NULL, '$2y$10$N3iEYTQZW3eHd4Cmrfa93.GpEEQgJTPI0L1v9vGm.W2k/wtpuw9TG', 'w2c3QLxTIMc1zzm4kx7vNJaa1hdr13PPdcC3c36trrTr0P5DSWdbxpnCbGtM', '2020-01-09 03:45:41', '2020-01-09 03:45:41');
 
 --
@@ -252,7 +263,7 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

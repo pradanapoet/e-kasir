@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth','checkRole:kasir']],function(){
 Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
 
     Route::get('/pos', 'POSController@index');
+    Route::post('/pos/store', 'POSController@store');
     Route::get('add-to-cart/{id}', 'POSController@addToCart');
 
 });
