@@ -258,7 +258,7 @@
                                         </div>
                                         <div class="font-weight-bold">
                                             <div class="text-truncate">Barang Kadaluarsa</div>
-                                            <div class="small text-gray-500">{{ $item->id_stok }}</div>
+                                            <div class="small text-gray-500">{{ $item->nama_barang }}</div>
                                         </div>
                                     </a>
                                 @endforeach

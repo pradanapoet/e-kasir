@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
         $data = DB::table('stok')
                 ->select('*')
+                ->join('barang','stok.id_barang','=','barang.id_barang')
                 ->where('tanggal_kadaluarsa',"<",Carbon::tomorrow())
                 ->get();
         View::share('isi',$data);
