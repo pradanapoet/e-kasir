@@ -139,7 +139,7 @@ class POSController extends Controller
             $htmlCart = view('fol-layout.main')->render();
 
             return response()->json(['data' => $htmlCart]);
-            return redirect('/pos');
+            // return redirect('/pos');
             //return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
@@ -153,7 +153,7 @@ class POSController extends Controller
             $htmlCart = view('fol-layout.main')->render();
 
             return response()->json(['data' => $htmlCart]);
-            return redirect('/pos');
+            // return redirect('/pos');
             //return redirect()->back()->with('success', 'Product added to cart successfully!');
 
         }
@@ -173,7 +173,52 @@ class POSController extends Controller
 
         return response()->json(['data' => $htmlCart]);
 
-        return redirect('/pos');
+        // return redirect('/pos');
 
+    }
+
+    public function remove(Request $request)
+    {
+        if($request->id) {
+
+            $cart = session()->get('cart');
+
+            if(isset($cart[$request->id])) {
+
+                unset($cart[$request->id]);
+
+                session()->put('cart', $cart);
+            }
+
+            $total = $this->getCartTotal();
+
+            $htmlCart = view('fol-layout.main')->render();
+
+            return response()->json(['msg' => 'Product removed successfully', 'data' => $htmlCart, 'total' => $total]);
+
+            return redirect('/pos');
+            //session()->flash('success', 'Product removed successfully');
         }
+    }
+
+
+    /**
+     * getCartTotal
+     *
+     *
+     * @return float|int
+     */
+    private function getCartTotal()
+    {
+        $total = 0;
+
+        $cart = session()->get('cart');
+
+        foreach($cart as $id => $details) {
+            $total += $details['price'] * $details['quantity'];
+        }
+
+        return number_format($total, 2);
+    }
+
 }
