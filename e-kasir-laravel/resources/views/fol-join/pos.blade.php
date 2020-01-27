@@ -183,29 +183,25 @@
 
             var ele = $(this);
 
-            var parent_row = ele.parents("tr");
+           // var parent_row = ele.parents("tr");
 
             var cart_total = $(".cart-total");
 
-            
+
                 $.ajax({
                     url: '{{ url('remove-from-cart') }}',
                     method: "DELETE",
                     data: {_token: '{{ csrf_token() }}', id: ele.attr("data-item-remove-id_stok")},
                     dataType: "json",
                     success: function (response) {
-                        location.reload();      
-                        parent_row.remove();
-
+                        location.reload();
+                        // parent_row.remove();
                         $("span#status").html('<div class="alert alert-success">'+response.msg+'</div>');
-                        $("#header-bar").html(response.data);                  
+                        $("#header-bar").html(response.data);
                         cart_total.text(response.total);
-
                     }
                 });
-            
         });
-
     </script>
 
 @stop

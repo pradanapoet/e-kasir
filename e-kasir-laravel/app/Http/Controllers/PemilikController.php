@@ -14,7 +14,10 @@ class PemilikController extends Controller
      */
     public function index()
     {
-        return view('fol-pemilik.index');
+        $jml_mail = DB::table('barang')
+                        ->select('*')
+                        ->count();
+        return view('fol-pemilik.index',compact('jml_mail'));
     }
 
     /**

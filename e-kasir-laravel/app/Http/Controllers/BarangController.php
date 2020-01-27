@@ -16,7 +16,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $kategori = KategoriModel::all(); // buat dropdown select 
+        $kategori = KategoriModel::all(); // buat dropdown select
         $barangjoin = DB::table('barang')->join('kategori','barang.id_kategori','=','kategori.id_kategori')->get(); // buat tampil barang
 
         return view('fol-join.list_item',compact('kategori','barangjoin'));

@@ -48,6 +48,11 @@ class POSController extends Controller
         if(count($request->nama) > 0)
         {
         foreach($request->nama as $item=>$v){
+            $stok = StokModel::where('id_stok', $request->nama[$item])->get();
+            $sisa = $stok[0]->sisa_stok - $request->jumlah[$item];
+            $update = StokModel::find($request->nama[$item]);
+            $update->update(['sisa_stok' => $sisa]);
+            $update->save();
             $data2=array(
                 'id_transaksi'=>$lastid,
                 'id_stok'=>$request->nama[$item],
