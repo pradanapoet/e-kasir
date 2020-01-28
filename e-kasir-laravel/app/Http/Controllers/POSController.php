@@ -61,7 +61,7 @@ class POSController extends Controller
                 'subtotal'=>$request->subtotal[$item]
             );
         DetailTransaksiModel::insert($data2);
-      }
+        }
         }
         $request->session()->forget('cart');
         return redirect('/pos')->with('success_transaksi', ' ');
@@ -141,7 +141,7 @@ class POSController extends Controller
 
             session()->put('cart', $cart);
 
-            $htmlCart = view('fol-layout.main')->render();
+            $htmlCart = view('fol-join._tabelpos')->render();
 
             return response()->json(['data' => $htmlCart]);
             // return redirect('/pos');
@@ -155,7 +155,7 @@ class POSController extends Controller
 
             session()->put('cart', $cart);
 
-            $htmlCart = view('fol-layout.main')->render();
+            $htmlCart = view('fol-join._tabelpos')->render();
 
             return response()->json(['data' => $htmlCart]);
             // return redirect('/pos');
@@ -174,7 +174,7 @@ class POSController extends Controller
 
         session()->put('cart', $cart);
 
-        $htmlCart = view('fol-layout.main')->render();
+        $htmlCart = view('fol-join._tabelpos')->render();
 
         return response()->json(['data' => $htmlCart]);
 
@@ -182,24 +182,25 @@ class POSController extends Controller
 
     }
 
-    public function remove(Request $request)
+    public function remove($id)
     {
-        if($request->id) {
+        //dd($id);
+        if($id) {
 
             $cart = session()->get('cart');
 
-            if(isset($cart[$request->id])) {
+            if(isset($cart[$id])) {
 
-                unset($cart[$request->id]);
+                unset($cart[$id]);
 
                 session()->put('cart', $cart);
             }
 
             $total = $this->getCartTotal();
 
-            $htmlCart = view('fol-layout.main')->render();
+            $htmlCart = view('fol-join._tabelpos')->render();
 
-            return response()->json(['msg' => 'Product removed successfully', 'data' => $htmlCart, 'total' => $total]);
+            //return response()->json(['data' => $htmlCart, 'total' => $total]);
 
             return redirect('/pos');
             //session()->flash('success', 'Product removed successfully');
@@ -220,7 +221,7 @@ class POSController extends Controller
         $cart = session()->get('cart');
 
         foreach($cart as $id => $details) {
-            $total += $details['price'] * $details['quantity'];
+            $total += $details['harga'] * $details['kuantitas'];
         }
 
         return number_format($total, 2);
