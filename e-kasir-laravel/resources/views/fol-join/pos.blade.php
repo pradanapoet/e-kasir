@@ -85,7 +85,7 @@
                 dataType: "json",
                 success: function (response) {
                     ele.siblings('.btn-loading').hide();
-                    $("span#status").html('<div class="alert alert-success">'+'Produk Berhasil Ditambahkan'+'</div>');
+                    //$("span#status").html('<div class="alert alert-success">'+'Produk Berhasil Ditambahkan'+'</div>');
                     $("#header-bar").html(response.data);
                     //location.reload();
                     console.log(response.data);

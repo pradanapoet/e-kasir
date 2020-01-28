@@ -1,6 +1,6 @@
 @extends('fol-layout/main')
 
-@section('title', 'Laporan Penjualan')
+@section('title', 'Detail Laporan Penjualan')
 
 @section('user')
     {{ auth()->user()->name }}
@@ -8,25 +8,27 @@
 
 @section('content')
     <div class="container">
-        <h3>Laporan Penjualan</h3>
+        <h3>Detail Laporan Penjualan</h3>
         <div class="card">
             <div class="container">
                 <table class="table table-hover table-condensed">
                     <thead>
                         <tr>
                             <th style="width: 10px;">#</th>
-                            <th>Tgl Transaksi</th>
-                            <th>Total</th>
-                            <th class="text-center">Action</th>
+                            <th>Nama Barang</th>
+                            <th>Harga</th>
+                            <th>Kuantitas</th>
+                            <th>Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($transaksi as $trs)
+                        @foreach ($detail_transaksi as $dtrs)
                         <tr>
                             <td style="width: 10px;"> {{ $loop->iteration }} </td>
-                            <td>{{$trs->created_at}}</td>
-                            <td>{{$trs->total}}</td>
-                        <td class="text-center"><a class="btn btn-sm btn-info fas fa-info" href="detail_lap_penjualan/{{ $trs->id_transaksi }}"></a></td>
+                            <td>{{$dtrs->nama_barang}}</td>
+                            <td>{{$dtrs->harga}}</td>
+                            <td>{{$dtrs->jumlah}}</td>
+                            <td>{{$dtrs->subtotal}}</td>
                         </tr>
                         @endforeach
                     </tbody>

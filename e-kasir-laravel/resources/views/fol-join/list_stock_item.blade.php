@@ -221,46 +221,44 @@
 
     <!-- Detail Modal -->
 
-        <div class="modal fade" id="detail-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-dark">
-                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-book-open"> </i><b>Detail Stok</b></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="exampleFormControlSelect1">Id Stok :</label>
-                                <input type="text" id="modal-show-id_stok" name="id_barang" class="form-control" readonly>
-                                <label for="exampleFormControlSelect1">Id Barang :</label>
-                                <input type="text" id="modal-show-id_barang" name="id_barang" class="form-control" readonly>
-                                <label for="exampleFormControlSelect1">Tanggal Masuk :</label>
-                                <input type="text" id="modal-show-tanggal_masuk" name="tanggal_masuk" class="form-control" readonly>
-                                <label for="exampleFormControlSelect1">Tanggal Kadaluarsa :</label>
-                                <input type="text" id="modal-show-tanggal_kadaluarsa" name="tanggal_kadaluarsa" class="form-control" readonly>
-                            </div>
-                            <div class="col-6">
-                                <label for="exampleFormControlSelect1">Jumlah Stok :</label>
-                                <input type="text" id="modal-show-jumlah_stok" name="jumlah_stok" class="form-control" readonly>
-                                <label for="exampleFormControlSelect1">Sisa Stok :</label>
-                                <input type="text" id="modal-show-sisa_stok" name="sisa_stok" class="form-control" readonly>
-                                <label for="exampleFormControlSelect1">Harga Beli :</label>
-                                <input type="text" id="modal-show-harga_beli" name="hara_beli" class="form-control" readonly>
-                                <label for="exampleFormControlSelect1">Harga Jual :</label>
-                                <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
-                            </div>
+    <div class="modal fade" id="detail-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-book-open"> </i><b>Detail Stok</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="exampleFormControlSelect1">Id Stok :</label>
+                            <input type="text" id="modal-show-id_stok" name="id_barang" class="form-control" readonly>
+                            <label for="exampleFormControlSelect1">Id Barang :</label>
+                            <input type="text" id="modal-show-id_barang" name="id_barang" class="form-control" readonly>
+                            <label for="exampleFormControlSelect1">Tanggal Masuk :</label>
+                            <input type="text" id="modal-show-tanggal_masuk" name="tanggal_masuk" class="form-control" readonly>
+                            <label for="exampleFormControlSelect1">Tanggal Kadaluarsa :</label>
+                            <input type="text" id="modal-show-tanggal_kadaluarsa" name="tanggal_kadaluarsa" class="form-control" readonly>
                         </div>
-                            <!-- Perlu Edit Posisi Modal Footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                            </div>
+                        <div class="col-6">
+                            <label for="exampleFormControlSelect1">Jumlah Stok :</label>
+                            <input type="text" id="modal-show-jumlah_stok" name="jumlah_stok" class="form-control" readonly>
+                            <label for="exampleFormControlSelect1">Sisa Stok :</label>
+                            <input type="text" id="modal-show-sisa_stok" name="sisa_stok" class="form-control" readonly>
+                            <label for="exampleFormControlSelect1">Harga Beli :</label>
+                            <input type="text" id="modal-show-harga_beli" name="hara_beli" class="form-control" readonly>
+                            <label for="exampleFormControlSelect1">Harga Jual :</label>
+                            <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <!-- Perlu Edit Posisi Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 

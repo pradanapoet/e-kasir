@@ -63,5 +63,6 @@ Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
     Route::post('/pos/store', 'POSController@store');
     Route::get('add-to-cart/{id}', 'POSController@addToCart');
     Route::get('remove-from-cart/{id}', 'POSController@remove');
+    Route::get('detail_lap_penjualan/{id}', 'PemilikController@detail_laporan_penjualan');
 
 });

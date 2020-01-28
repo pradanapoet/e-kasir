@@ -104,8 +104,27 @@ class PemilikController extends Controller
     // }
     public function laporan_penjualan()
     {
-        return view('fol-join.selling_report');
+        $transaksi = DB::table('transaksi')->get();
+        // ->join('detail_transaksi','detail_transaksi.id_transaksi','=','transaksi.id_transaksi')->get();
+        // ->join('stok','stok.id_stok','=','detail_transaksi.id_stok')->get();
+        // $detail_transaksi = DB::table('transaksi')
+        // ->join('detail_transaksi','detail_transaksi.id_transaksi','=','transaksi.id_transaksi')
+        // ->join('stok','stok.id_stok','=','detail_transaksi.id_stok')
+        // ->where('id_transaksi',$id_transaksi)->get();
+        return view('fol-join.selling_report',compact('transaksi'));
     }
+
+    public function detail_laporan_penjualan($id)
+    {
+        $detail_transaksi = DB::table('detail_transaksi')
+        ->join('transaksi','transaksi.id_transaksi','=','detail_transaksi.id_transaksi')
+        ->join('stok','stok.id_stok','=','detail_transaksi.id_stok')
+        ->join('barang','stok.id_barang','=','barang.id_barang')
+        ->where('detail_transaksi.id_transaksi', $id )->get();
+        // dd($detail_transaksi);
+        return view('fol-join.selling_report_detail',compact('detail_transaksi'));
+    }
+
     public function laporan_laba()
     {
         return view('fol-join.profit_report');
