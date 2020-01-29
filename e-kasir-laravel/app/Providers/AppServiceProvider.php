@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         $notif = DB::table('stok')
                 ->select('*')
                 ->where('tanggal_kadaluarsa',"<",Carbon::tomorrow())
+                ->where('status','!=','expired')
                 ->count();
         View::share('notif', $notif);
 
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
                 ->select('*')
                 ->join('barang','stok.id_barang','=','barang.id_barang')
                 ->where('tanggal_kadaluarsa',"<",Carbon::tomorrow())
+                ->where('status','!=','expired')
                 ->get();
         View::share('isi',$data);
         Schema::defaultStringLength(191);

@@ -36,8 +36,11 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
         Route::post('/tambah_stok', 'StokController@tambah_stok'); //tambah stok
         Route::post('/liststok_pemilik/update', 'StokController@update'); // update stok
     Route::get('/lap_penjualan_pemilik', 'PemilikController@laporan_penjualan');
+        Route::post('/detail_lap_penjualan', 'PemilikController@detail_laporan_penjualan');
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
+    Route::get('/stok_kadaluarsa', 'PemilikController@kadaluarsa');
+        Route::get('update-status/{id}', 'PemilikController@update_status');
 
 });
 
@@ -63,6 +66,5 @@ Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
     Route::post('/pos/store', 'POSController@store');
     Route::get('add-to-cart/{id}', 'POSController@addToCart');
     Route::get('remove-from-cart/{id}', 'POSController@remove');
-    Route::get('detail_lap_penjualan/{id}', 'PemilikController@detail_laporan_penjualan');
 
 });

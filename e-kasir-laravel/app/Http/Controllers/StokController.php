@@ -89,7 +89,8 @@ class StokController extends Controller
                 'jumlah_stok_masuk' =>  $request->jumlah_stok_masuk,
                 'sisa_stok' => $request->sisa_stok,
                 'harga_beli' => $request->harga_beli,
-                'harga_jual' => $request->harga_jual
+                'harga_jual' => $request->harga_jual,
+                'status' => 'aktif'
             ]);
 
         return redirect('/liststok_pemilik')->with('success_update', ' ');
@@ -123,7 +124,8 @@ class StokController extends Controller
             'jumlah_stok_masuk' =>  $request->jumlah_stok_masuk,
             'sisa_stok' => $request->jumlah_stok_masuk,
             'harga_beli' => $request->harga_beli,
-            'harga_jual' => $request->harga_jual
+            'harga_jual' => $request->harga_jual,
+            'status' => 'aktif'
 
         ]);
 

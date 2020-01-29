@@ -17,18 +17,28 @@
     <script src="js/sb-admin-2.min.js"></script>
     <script src="js/sb-admin-2.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-    {{-- <script src="{{ asset('js/app.js' )}}" ></script> --}}
 
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="css/sb-admin-2.css">
     <link rel="stylesheet" type="text/css" href="css/sb-admin-2.min.css">
+
+    <!-- Custom styles for table -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
      <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -243,26 +253,30 @@
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">{{ $notif }}</span>
+                            @if($notif > 0)
+                                <span class="badge badge-danger badge-counter">{{ $notif }}</span>
+                            @endif  
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
-                                    Message Center
+                                    Barang Kadaluarsa
                                 </h6>
-                                @foreach ($isi as $item)
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">Barang Kadaluarsa</div>
-                                            <div class="small text-gray-500">{{ $item->nama_barang }}</div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                <div id="notif">
+                                    @foreach ($isi as $item)
+                                        <i class="dropdown-item d-flex align-items-center" style="pointer-events:none;">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="font-weight-bold">
+                                                <div class="text-truncate">{{ $item->nama_barang }}</div>
+                                                <div class="small text-gray-500">{{ $item->tanggal_kadaluarsa }}</div>
+                                            </div>
+                                        </i>
+                                    @endforeach
+                                </div>
+                                <a class="dropdown-item text-center small text-gray-600" href="/stok_kadaluarsa">Daftar Barang Kadaluarsa</a>
                             </div>
                         </li>
 
@@ -351,4 +365,53 @@
 
 </body>
 
+@section('scripts')
+
+    <script type="text/javascript">
+
+        $(".update-status").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            loading.show();
+
+            $.ajax({
+                url: '{{ url('update-status') }}' + '/' + ele.attr("data-item-id_stok_notif"),
+                method: "GET",
+                data: {_token: '{{ csrf_token() }}'},
+                dataType: "json",
+                success: function (response) {
+                    loading.hide();
+                    
+                    $("#notif").html(response.data);
+                    console.log(response.data);
+                }       
+            });
+        });
+
+        // $(".update-status").click(function (e) {
+        //     e.preventDefault();
+        //     var ele = $(this);
+        //     ele.siblings('.btn-loading').show();
+
+        //     $.ajax({
+        //         url: '{{ url('update-status') }}' + '/' + ele.attr("data-item-id_stok"),
+        //         method: "GET",
+        //         data: {_token: '{{ csrf_token() }}'},
+        //         dataType: "json",
+        //         success: function (response) {
+        //             ele.siblings('.btn-loading').hide();
+        //             $("#header-bar").html(response.data);
+        //             console.log(response.data);
+        //         },
+        //         statusCode:{
+        //             500:function(e){
+        //                 console.log(e.responseText);
+        //             }
+        //         }
+        //     });
+        // });
+    </script>
+@stop
 </html>

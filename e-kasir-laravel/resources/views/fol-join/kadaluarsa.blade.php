@@ -1,6 +1,6 @@
 @extends('fol-layout/main')
 
-@section('title', 'Laporan Barang')
+@section('title', 'Barang Kadaluarsa')
 
 @section('user')
     {{ auth()->user()->name }}
@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Laporan Barang</h3>
+        <h3>Barang Kadaluarsa</h3>
         <div class="card">
             <div class="container">
                 <table class="table">
@@ -37,7 +37,7 @@
                             <td>{{ $stok->sisa_stok }}</td>
                             <td>{{ $stok->status }}</td>
                             <td>
-                            <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Detail</button>
+                                <a href="update-status/{{$stok->id_stok}}" class="badge badge-danger">Non-Aktifkan</a>
                             </td>
                         </tr>
                         @endforeach

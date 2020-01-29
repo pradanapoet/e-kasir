@@ -32,6 +32,14 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                                <td colspan="2" class="font-weight-bold">Total</td>
+                                <td colspan="2" class="hidden-xs"></td>
+                                <td class="hidden-xs"><strong>Rp.<span class="cart-total">{{ $total }}</span></strong>,-
+                                </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

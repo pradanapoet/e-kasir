@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\StokModel;
+use Carbon\Carbon;
 
 class PemilikController extends Controller
 {
@@ -105,24 +107,19 @@ class PemilikController extends Controller
     public function laporan_penjualan()
     {
         $transaksi = DB::table('transaksi')->get();
-        // ->join('detail_transaksi','detail_transaksi.id_transaksi','=','transaksi.id_transaksi')->get();
-        // ->join('stok','stok.id_stok','=','detail_transaksi.id_stok')->get();
-        // $detail_transaksi = DB::table('transaksi')
-        // ->join('detail_transaksi','detail_transaksi.id_transaksi','=','transaksi.id_transaksi')
-        // ->join('stok','stok.id_stok','=','detail_transaksi.id_stok')
-        // ->where('id_transaksi',$id_transaksi)->get();
         return view('fol-join.selling_report',compact('transaksi'));
     }
 
-    public function detail_laporan_penjualan($id)
+    public function detail_laporan_penjualan(Request $request)
     {
+        $total = $request->total;
         $detail_transaksi = DB::table('detail_transaksi')
         ->join('transaksi','transaksi.id_transaksi','=','detail_transaksi.id_transaksi')
         ->join('stok','stok.id_stok','=','detail_transaksi.id_stok')
         ->join('barang','stok.id_barang','=','barang.id_barang')
-        ->where('detail_transaksi.id_transaksi', $id )->get();
+        ->where('detail_transaksi.id_transaksi', $request->id )->get();
         // dd($detail_transaksi);
-        return view('fol-join.selling_report_detail',compact('detail_transaksi'));
+        return view('fol-join.selling_report_detail',compact('detail_transaksi','total'));
     }
 
     public function laporan_laba()
@@ -131,30 +128,30 @@ class PemilikController extends Controller
     }
     public function laporan_barang()
     {
-        return view('fol-join.item_report');
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
+        return view('fol-join.item_report', compact('stok'));
     }
-    // public function tambah_kategori(Request $request)
-    // {
-    //     $this->validate($request,[
-    // 		'nama_kategori' => 'required'
-    //     ]);
+    public function update_status($id)
+    {
+        $update = StokModel::find($id);
+        //dd($update);
+        $update->update(['status' => 'expired']);
+        $update->save();
 
-    //     CategoryModel::create([
-    // 		'nama_kategori' => $request->nama_kategori
-    //     ]);
+        // $htmlCart = view('fol-join._tabelnotif')->render();
 
-    //     return redirect('/kategori_pemilik')->with('success', ' ');
-    // }
-
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit(CategoryModel  $kat)
-    // {
-    //     return view('fol-join.category_edit',compact('kat'));
-    // }
+        // return response()->json(['data' => $htmlCart]);
+            // return redirect('/pos');
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+    public function kadaluarsa()
+    {
+        $stok = DB::table('stok')
+                ->select('*')
+                ->join('barang','barang.id_barang','=','stok.id_barang')
+                ->where('tanggal_kadaluarsa',"<",Carbon::tomorrow())
+                ->where('status','!=','expired')
+                ->get();
+        return view('fol-join.kadaluarsa', compact('stok'));
+    }
 }
