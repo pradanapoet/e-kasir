@@ -16,10 +16,29 @@ class PemilikController extends Controller
      */
     public function index()
     {
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
         $jml_mail = DB::table('barang')
                         ->select('*')
                         ->count();
-        return view('fol-pemilik.index',compact('jml_mail'));
+        $stok = DB::table('stok')
+                        ->select('*')
+                        ->get();
+                        foreach ($stok as $s) {
+                            $masuk += $s->jumlah_stok_masuk;
+                            $sisa += $s->sisa_stok;
+                            $total_pengeluaran += $s->jumlah_stok_masuk * $s->harga_beli;
+                        }
+        $hasil = $masuk - $sisa;
+        $transaksi = DB::table('transaksi')
+                    ->select('total')->get();
+                    foreach ($transaksi as $t) {
+                        $total_pemasukan += $t->total;
+                    }
+        $total = $total_pemasukan - $total_pengeluaran;
+        return view('fol-pemilik.index',compact('jml_mail','hasil','total'));
     }
 
     /**
