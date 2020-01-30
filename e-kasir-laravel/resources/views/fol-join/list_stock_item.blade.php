@@ -21,46 +21,46 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
+            @if(auth()->user()->role=='pemilik')
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".modal-tambah-barang">Tambah Stok Barang</button>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger ">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Whoops!</strong> Stok Barang Tidak Berhasil Ditambahkan.<br><br>
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ 'Masukkan data stok barang terlebih dahulu sebelum menyimpannya.' }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (Session::get('success'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Yuhuu!</strong> Stok Barang Baru Berhasil Ditambahkan.
+                    </div>
+                @endif
+
+                @if (Session::get('success_update'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Yuhuu!</strong> Stok Barang Terpilih Berhasil Update.
+                    </div>
+                @endif
+
+                @if (Session::get('fail'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Yuhuu!</strong> Stok Barang Terpilih Telah Dihapus.
+                    </div>
+                @endif
+            @endif
             <div class="card shadow mb-4">
                 <div class="card-body">
-                    @if(auth()->user()->role=='pemilik')
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".modal-tambah-barang">Tambah Stok Barang</button>
-                            @if (count($errors) > 0)
-                                <div class="alert alert-danger ">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>Whoops!</strong> Stok Barang Tidak Berhasil Ditambahkan.<br><br>
-                                    <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ 'Masukkan data stok barang terlebih dahulu sebelum menyimpannya.' }}</li>
-                                    @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            @if (Session::get('success'))
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>Yuhuu!</strong> Stok Barang Baru Berhasil Ditambahkan.
-                                </div>
-                            @endif
-
-                            @if (Session::get('success_update'))
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>Yuhuu!</strong> Stok Barang Terpilih Berhasil Update.
-                                </div>
-                            @endif
-
-                            @if (Session::get('fail'))
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>Yuhuu!</strong> Stok Barang Terpilih Telah Dihapus.
-                                </div>
-                            @endif
-                        @endif
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th class="text-center" scope="col">#</th>
                                     <th class="text-center" scope="col">Nama Barang</th>
@@ -74,7 +74,7 @@
                             @foreach ($stok as $stok)
                             <tr>
                                 <th class="text-center" scope="col">{{ $loop->iteration }}</th>
-                                <td class="align-middle kategori text-center" id="nama_barang">{{ $stok->nama_barang }}</td>
+                                <td class="align-middle kategori text-left" id="nama_barang">{{ $stok->nama_barang }}</td>
                                 <td class="align-middle kategori text-center" id="tanggal_masuk">{{ $stok->tanggal_masuk }}</td>
                                 <td class="align-middle kategori text-center" id="tanggal_kadaluarsa">{{ $stok->tanggal_kadaluarsa }}</td>
                                 <td class="text-center" >{{ $stok->jumlah_stok_masuk }}</td>

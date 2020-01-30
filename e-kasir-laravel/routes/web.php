@@ -22,25 +22,25 @@ Route::get('/logout', 'AuthController@logout');
 
 // Hanya Pemilik
 Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
-
     Route::get('/pemilik', 'PemilikController@index');
     Route::get('/kategori_pemilik', 'KategoriController@index');//read kategori
-        Route::post('/tambah_kategori', 'KategoriController@tambah_kategori'); //tambah kategori
-        Route::post('/kategori_pemilik/update', 'KategoriController@update'); // update kategori
-        Route::post('/kategori_pemilik/hapus', 'KategoriController@destroy'); //Untuk Hapus Kategori
+    Route::post('/tambah_kategori', 'KategoriController@tambah_kategori'); //tambah kategori
+    Route::post('/kategori_pemilik/update', 'KategoriController@update'); // update kategori
+    Route::post('/kategori_pemilik/hapus', 'KategoriController@destroy'); //Untuk Hapus Kategori
     Route::get('/listbarang_pemilik', 'BarangController@index');
-        Route::post('/tambah_barang', 'BarangController@tambah_barang'); //tambah barang
-        Route::post('/listbarang_pemilik/update', 'BarangController@update'); // update kategori
-        Route::post('/listbarang_pemilik/hapus', 'BarangController@destroy'); //Untuk Hapus Kategori
+    Route::post('/tambah_barang', 'BarangController@tambah_barang'); //tambah barang
+    Route::post('/listbarang_pemilik/update', 'BarangController@update'); // update kategori
+    Route::post('/listbarang_pemilik/hapus', 'BarangController@destroy'); //Untuk Hapus Kategori
     Route::get('/liststok_pemilik', 'StokController@index');
-        Route::post('/tambah_stok', 'StokController@tambah_stok'); //tambah stok
-        Route::post('/liststok_pemilik/update', 'StokController@update'); // update stok
+    Route::post('/tambah_stok', 'StokController@tambah_stok'); //tambah stok
+    Route::post('/liststok_pemilik/update', 'StokController@update'); // update stok
     Route::get('/lap_penjualan_pemilik', 'PemilikController@laporan_penjualan');
-        Route::post('/detail_lap_penjualan', 'PemilikController@detail_laporan_penjualan');
+    Route::post('/detail_lap_penjualan', 'PemilikController@detail_laporan_penjualan');
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
+    Route::post('/lap_laba_pemilik', 'PemilikController@laporan_laba_sort');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
     Route::get('/stok_kadaluarsa', 'PemilikController@kadaluarsa');
-        Route::get('update-status/{id}', 'PemilikController@update_status');
+    Route::get('update-status/{id}', 'PemilikController@update_status');
 
 });
 
@@ -66,5 +66,4 @@ Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
     Route::post('/pos/store', 'POSController@store');
     Route::get('add-to-cart/{id}', 'POSController@addToCart');
     Route::get('remove-from-cart/{id}', 'POSController@remove');
-
 });

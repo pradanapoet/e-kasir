@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-<h1>Iki halaman kategori</h1>
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -46,7 +45,7 @@
                     </div>
                 @endif
             @endif
-            <table class="table">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>

@@ -124,7 +124,20 @@ class PemilikController extends Controller
 
     public function laporan_laba()
     {
-        return view('fol-join.profit_report');
+        $transaksi = DB::table('transaksi')->get();
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
+        return view('fol-join.profit_report',compact('transaksi','stok'));
+    }
+    public function laporan_laba_sort(Request $request)
+    {
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $transaksi = DB::table('transaksi')
+        ->whereBetween('created_at',array($dari,$sampai))->get();
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')
+        ->whereBetween('stok.created_at',array($dari,$sampai))->get();
+        return view('fol-join.profit_report',compact('transaksi','stok'));
+
     }
     public function laporan_barang()
     {
