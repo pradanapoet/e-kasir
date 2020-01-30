@@ -10,8 +10,8 @@
     <div class="container">
         <h3>Laporan Barang</h3>
         <div class="card">
-            <div class="container">
-                <table class="table">
+            <div class="container mt-4 mb-4">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>

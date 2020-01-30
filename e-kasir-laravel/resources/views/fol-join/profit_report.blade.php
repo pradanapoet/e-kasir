@@ -17,8 +17,9 @@
     <?php $total_pemasukan += $t->total ?>
 @endforeach
 
-    <!-- Content Row -->
-    <div class="row">
+<div class="container">
+     <!-- Content Row -->
+     <div class="row">
 
         <!-- Jumlah Barang Yang Dijual -->
         <div class="col-4 mb-4">
@@ -74,28 +75,40 @@
 
     <!-- Content Row -->
     <div class="card shadow mb-4">
-        <form method="post" action="/lap_laba_pemilik">
-            @csrf
-            <div class="form-group d-inline">
-                <label><i class="fas fa-calendar text-danger"></i> Dari Tanggal</label>
-                <input type="date" name="dari" class="form-control" required>
+        <div class="card-header">
+            <h4>Rentan Pencarian</h4>
+        </div>
+        <div class="card-body">
+            <div class="container mt-3">
+                <form method="post" action="/lap_laba_pemilik">
+                    @csrf
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group d-inline">
+                                <label><i class="fas fa-calendar text-danger"></i> Dari Tanggal</label>
+                                <input type="date" name="dari" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group d-inline">
+                                <label><i class="fas fa-calendar text-danger"></i> Sampai Tanggal</label>
+                                <input type="date" name="sampai" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" value="CARI" name="cari" class="btn btn-sm btn-danger">
+                        <a href="/lap_laba_pemilik" class="btn btn-sm btn-danger">RESET</a>
+                    </div>
+                </form>
             </div>
+        </div>
 
-            <div class="form-group d-inline">
-                <label><i class="fas fa-calendar text-danger"></i> Sampai Tanggal</label>
-                <input type="date" name="sampai" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="CARI" name="cari" class="btn btn-sm btn-danger">
-            </div>
-        </form>
-            <a href="/lap_laba_pemilik" class="btn btn-sm btn-danger">RESET</a>
     </div>
 
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h4>Laporan Pengeluaran</h4>
+        <h4>Laporan Pengeluaran</h4>@if($dari!=NULL)<h5 class="d-inline">( {{$dari}} - {{$sampai}} )</h5>@endif
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -145,7 +158,7 @@
     </div>
     <div class="card shadow mb-4 mt-4">
         <div class="card-header">
-            <h4>Laporan Pemasukan</h4>
+            <h4>Laporan Pemasukan</h4>@if($dari!=NULL)<h5 class="d-inline">( {{$dari}} - {{$sampai}} )</h5>@endif
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -185,4 +198,6 @@
             </div>
         </div>
     </div>
+</div>
+
 @endsection

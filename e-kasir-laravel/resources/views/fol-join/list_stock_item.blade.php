@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-12">
             @if(auth()->user()->role=='pemilik')
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".modal-tambah-barang">Tambah Stok Barang</button>
+            <button type="button" class="btn btn-primary mb-3 shadow" data-toggle="modal" data-target=".modal-tambah-barang">Tambah Stok Barang</button>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger ">
                         <button type="button" class="close" data-dismiss="alert">×</button>
