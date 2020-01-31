@@ -3,7 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Auth;
+use Session;
 class CheckRole
 {
     /**
@@ -18,8 +19,9 @@ class CheckRole
         if(in_array($request->user()->role,$roles)){
             return $next($request);
         }
-        
-        return redirect('/login');
+        Auth::logout();
+        Session::flush();
+        return redirect('/');
 
     }
 }
