@@ -8,14 +8,23 @@
 
 @section('content')
 <?php $total_pengeluaran = 0 ?>
+<?php $total_p = 0 ?>
 @foreach ($stok as $as)
-    <?php $total_pengeluaran += $as->harga_beli * $as->jumlah_stok_masuk ?>
+    <?php $total_p += $as->harga_beli * $as->jumlah_stok_masuk ?>
 @endforeach
+<?php $total_pengeluaran = number_format($total_p,2,",",".") ?>
 
+<?php $total_pem = 0 ?>
 <?php $total_pemasukan = 0 ?>
 @foreach ($transaksi as $t)
-    <?php $total_pemasukan += $t->total ?>
+    <?php $total_pem += $t->total ?>
 @endforeach
+<?php $total_pemasukan = number_format($total_pem,2,",",".") ?>
+
+<?php $untung = $total_pem - $total_p ?>
+<?php $keuntungan = number_format($untung,2,",",".") ?>
+
+
 
 <div class="container">
      <!-- Content Row -->
@@ -62,7 +71,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Keuntungan :</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.{{$total_pemasukan - $total_pengeluaran }},-</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.{{ $keuntungan }},-</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

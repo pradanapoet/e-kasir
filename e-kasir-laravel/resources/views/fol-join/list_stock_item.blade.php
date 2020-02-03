@@ -18,6 +18,7 @@
     }
 </script>
 
+
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -73,6 +74,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $i=0;
+                                    $bar = array(); ?>
                             @foreach ($stok as $stok)
                             <?php
                             $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
@@ -85,7 +89,7 @@
                                 <td class="text-center" >{{ $stok->jumlah_stok_masuk }}</td>
                             <td class="text-center"><?php echo $barcode ?></td>
                                 <td class="text-center" >
-                                    <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}" data-item-barcode="<?php $barcode ?>">Detail</button>
+                                    <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}" data-item-barcode="{{ $barcode }}">Detail</button>
                                     <button type="button" class="badge badge-info" id="edit-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Edit</button>
                                     <form action="/liststok_pemilik/hapus" method="post" class="d-inline">
                                         @csrf
@@ -94,6 +98,9 @@
                                     </form>
                                 </td>
                             </tr>
+                            <?php
+                                $bar[$i] = $stok->id_stok;
+                                $i++; ?>
                             @endforeach
                         </tbody>
                         </table>
@@ -261,7 +268,7 @@
                                 <label for="exampleFormControlSelect1">Harga Jual :</label>
                                 <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
                                 <label for="exampleFormControlSelect1">Barcode :</label>
-                                <input type="text" id="modal-show-barcode" name="barcode" class="form-control" readonly>
+                                <div id="modal-show-barcode"></div>
                             </div>
                         </div>
                         <!-- Perlu Edit Posisi Modal Footer -->
@@ -306,7 +313,8 @@
     var barcode = el.data('item-barcode');
 
 
-    // fill the data in the input fields
+
+
     $("#modal-show-id_stok").val(id_stok);
     $("#modal-show-id_barang").val(id_barang);
     $("#modal-show-jumlah_stok").val(jumlah_stok_masuk);
@@ -315,15 +323,15 @@
     $("#modal-show-sisa_stok").val(sisa_stok);
     $("#modal-show-harga_beli").val(harga_beli);
     $("#modal-show-harga_jual").val(harga_jual);
-    $("#modal-show-barcode").val(barcode);
+    $("#modal-show-barcode").html(barcode);
 
 
   })
 
   // on modal hide
-  $('#edit-modal').on('hide.bs.modal', function() {
+  $('#detail-modal').on('hide.bs.modal', function() {
     $('.detail-item-trigger-clicked').removeClass('detail-item-trigger-clicked')
-    $("#edit-modal").trigger("reset");
+    $("#detail-modal").trigger("reset");
   });
 
 

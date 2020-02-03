@@ -38,7 +38,8 @@ class PemilikController extends Controller
                         $total_pemasukan += $t->total;
                     }
         $total = $total_pemasukan - $total_pengeluaran;
-        return view('fol-pemilik.index',compact('jml_mail','hasil','total'));
+        $keuntungan = number_format($total,2,",",".");
+        return view('fol-pemilik.index',compact('jml_mail','hasil','keuntungan'));
     }
 
     /**
