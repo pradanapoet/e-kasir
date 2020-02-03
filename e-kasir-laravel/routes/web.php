@@ -18,6 +18,7 @@
 Route::get('/', 'AuthController@login')->name('login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
+Route::get('/coba', 'StokController@coba');
 // Route::get('/pemilik/dashboard', 'PemilikController@index');
 
 // Hanya Pemilik

@@ -56,6 +56,7 @@
                     </div>
                 @endif
             @endif
+            <a href="/coba">Coba</a>
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -67,19 +68,24 @@
                                     <th class="text-center" scope="col">Tanggal Masuk</th>
                                     <th class="text-center" scope="col">Tanggal Kadaluarsa</th>
                                     <th class="text-center" scope="col">Jumlah Barang Masuk</th>
+                                    <th class="text-center" scope="col">Barcode</th>
                                     <th class="text-center" scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach ($stok as $stok)
+                            <?php
+                            $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+                            $barcode = $generator->getBarcode($stok->id_stok, $generator::TYPE_CODE_128);?>
                             <tr>
                                 <th class="text-center" scope="col">{{ $loop->iteration }}</th>
                                 <td class="align-middle kategori text-left" id="nama_barang">{{ $stok->nama_barang }}</td>
                                 <td class="align-middle kategori text-center" id="tanggal_masuk">{{ $stok->tanggal_masuk }}</td>
                                 <td class="align-middle kategori text-center" id="tanggal_kadaluarsa">{{ $stok->tanggal_kadaluarsa }}</td>
                                 <td class="text-center" >{{ $stok->jumlah_stok_masuk }}</td>
+                            <td class="text-center"><?php echo $barcode ?></td>
                                 <td class="text-center" >
-                                    <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Detail</button>
+                                    <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}" data-item-barcode="<?php $barcode ?>">Detail</button>
                                     <button type="button" class="badge badge-info" id="edit-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Edit</button>
                                     <form action="/liststok_pemilik/hapus" method="post" class="d-inline">
                                         @csrf
@@ -254,6 +260,8 @@
                                 <input type="text" id="modal-show-harga_beli" name="hara_beli" class="form-control" readonly>
                                 <label for="exampleFormControlSelect1">Harga Jual :</label>
                                 <input type="text" id="modal-show-harga_jual" name="harga_jual" class="form-control" readonly>
+                                <label for="exampleFormControlSelect1">Barcode :</label>
+                                <input type="text" id="modal-show-barcode" name="barcode" class="form-control" readonly>
                             </div>
                         </div>
                         <!-- Perlu Edit Posisi Modal Footer -->
@@ -295,6 +303,7 @@
     var sisa_stok = el.data('item-sisa_stok');
     var harga_beli = el.data('item-harga_beli');
     var harga_jual = el.data('item-harga_jual');
+    var barcode = el.data('item-barcode');
 
 
     // fill the data in the input fields
@@ -306,6 +315,8 @@
     $("#modal-show-sisa_stok").val(sisa_stok);
     $("#modal-show-harga_beli").val(harga_beli);
     $("#modal-show-harga_jual").val(harga_jual);
+    $("#modal-show-barcode").val(barcode);
+
 
   })
 
