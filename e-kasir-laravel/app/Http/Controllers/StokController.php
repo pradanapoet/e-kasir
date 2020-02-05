@@ -7,6 +7,7 @@ use App\BarangModel;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
+use PDF;
 use File;
 use App\Picqer\src\BarcodeGeneratorHTML;
 
@@ -29,14 +30,6 @@ class StokController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    // public function coba(){
-    //     $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
-    //     echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
-    // }
-
-
     public function create()
     {
         //
@@ -143,4 +136,14 @@ class StokController extends Controller
         return redirect('/liststok_pemilik')->with('success', ' ');
     }
 
-}
+
+    public function print_barcode(Request $request)
+    {
+        // dd($request->id);
+        $barcode = PDF::loadview('fol-join.printable_barcode',['id_stok'=>$request->id]);
+        return $barcode->download("barcode-$request->id");
+        // return $barcode->stream();
+        
+    }
+
+    }

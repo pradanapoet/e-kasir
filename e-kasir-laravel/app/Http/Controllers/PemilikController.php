@@ -166,6 +166,13 @@ class PemilikController extends Controller
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
         return view('fol-join.item_report', compact('stok'));
     }
+    
+    public function laporan_barang_print()
+    {
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
+        return view('fol-join.item_report_print', compact('stok'));
+    }
+
     public function update_status($id)
     {
         $update = StokModel::find($id);

@@ -18,7 +18,7 @@
 Route::get('/', 'AuthController@login')->name('login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
-Route::get('/coba', 'StokController@coba');
+// Route::get('/coba', 'StokController@coba');
 // Route::get('/pemilik/dashboard', 'PemilikController@index');
 
 // Hanya Pemilik
@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
     Route::post('/lap_laba_pemilik', 'PemilikController@laporan_laba_sort');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
+        Route::get('/lap_barang_pemilik_print', 'PemilikController@laporan_barang_print');
     Route::get('/stok_kadaluarsa', 'PemilikController@kadaluarsa');
     Route::get('update-status/{id}', 'PemilikController@update_status');
 
@@ -65,6 +66,8 @@ Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
 
     Route::get('/pos', 'POSController@index');
     Route::post('/pos/store', 'POSController@store');
+    Route::get('/pos/store-selesai', 'POSController@store_selesai');
     Route::get('add-to-cart/{id}', 'POSController@addToCart');
     Route::get('remove-from-cart/{id}', 'POSController@remove');
+    Route::post('/print-barcode', 'StokController@print_barcode');
 });

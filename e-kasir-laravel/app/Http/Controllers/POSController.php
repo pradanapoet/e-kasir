@@ -63,7 +63,12 @@ class POSController extends Controller
         DetailTransaksiModel::insert($data2);
         }
         }
-        $request->session()->forget('cart');
+        return view('fol-join.pos_struk',compact('lastid'));
+        // return redirect('/pos')->with('success_transaksi', ' ');
+    }
+
+    public function store_selesai(){
+        session()->forget('cart');
         return redirect('/pos')->with('success_transaksi', ' ');
     }
 

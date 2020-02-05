@@ -87,7 +87,13 @@
                                 <td class="align-middle kategori text-center" id="tanggal_masuk">{{ $stok->tanggal_masuk }}</td>
                                 <td class="align-middle kategori text-center" id="tanggal_kadaluarsa">{{ $stok->tanggal_kadaluarsa }}</td>
                                 <td class="text-center" >{{ $stok->jumlah_stok_masuk }}</td>
-                            <td class="text-center"><?php echo $barcode ?></td>
+                                <td class="text-center">
+                                    <form action="/print-barcode" method="post" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" value="{{$stok->id_stok}}" class="form-control" name="id">
+                                        <button type="submit"><?php echo $barcode ?></button>
+                                    </form>
+                                </td>
                                 <td class="text-center" >
                                     <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}" data-item-barcode="{{ $barcode }}">Detail</button>
                                     <button type="button" class="badge badge-info" id="edit-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Edit</button>
