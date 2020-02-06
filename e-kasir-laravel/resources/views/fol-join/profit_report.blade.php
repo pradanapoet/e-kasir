@@ -7,8 +7,9 @@
 @endsection
 
 @section('content')
-<?php $total_pengeluaran = 0 ?>
+
 <?php $total_p = 0 ?>
+<?php $total_pengeluaran = 0 ?>
 @foreach ($stok as $as)
     <?php $total_p += $as->harga_beli * $as->jumlah_stok_masuk ?>
 @endforeach
@@ -110,9 +111,18 @@
                         <a href="/lap_laba_pemilik" class="btn btn-sm btn-danger">RESET</a>
                     </div>
                 </form>
+                {{-- {{ $status_sort }} --}}
+                    @if ($status_sort=='belum')
+                        <a class="btn btn-info shadow float-right d-inline" style="width:50px; margin-top:20px; margin-left:25px;" href="/lap_laba_pemilik_print"><i class="fas fa-print"></i></a>
+                    @else
+                    <form action="/lap_laba_pemilik_print">
+                        <input type="hidden" name="dari" value="{{$dari}}" class="form-control" required>
+                        <input type="hidden" name="sampai" value="{{$sampai}}" class="form-control" required>
+                        <button type="submit" class="btn btn-info shadow float-right d-inline" style="width:50px; margin-top:20px; margin-left:25px;"><i class="fas fa-print"></i></button>
+                    </form> 
+                    @endif
             </div>
         </div>
-
     </div>
 
     <div class="card shadow mb-4">
@@ -132,13 +142,10 @@
                             <th scope="col">Harga Beli</th>
                             <th scope="col">Sub-Total</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($stok as $stok)
-
                         <tr>
                             <th scope="col">{{ $loop->iteration }}</th>
                             <td class="align-middle kategori" id="nama_barang">{{ $stok->nama_barang }}</td>
@@ -148,9 +155,6 @@
                             <td>{{$stok->harga_beli }}</td>
                             <td>{{$stok->harga_beli * $stok->jumlah_stok_masuk}}</td>
                             <td>{{ $stok->status }}</td>
-                            <td>
-                            <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Detail</button>
-                            </td>
                         </tr>
                         @endforeach
                 </tbody>
@@ -184,17 +188,17 @@
                         @foreach ($transaksi as $trs)
                         <tr>
                         <form action="/detail_lap_penjualan" method="post" class="d-inline">
-                        @csrf
-                            <td style="width: 10px;"> {{ $loop->iteration }} </td>
-                            <td class="text-center">{{$trs->created_at}}</td>
-                            <td class="text-center"><input type="hidden" value="{{ $trs->total }}" class="form-control" name="total">{{$trs->total}}</td>
-                            {{-- <td class="text-center"><a class="btn btn-sm btn-info fas fa-info" href="detail_lap_penjualan/{{ $trs->id_transaksi }}"></a></td> --}}
-                            <td class="text-center">
-                                <input type="hidden" value="{{ $trs->id_transaksi }}" class="form-control" name="id">
-                                <button type="submit" class="btn btn-sm btn-info fas fa-info"></button>
-                            </td>
-                        </tr>
-                    </form>
+                            @csrf
+                                <td style="width: 10px;"> {{ $loop->iteration }} </td>
+                                <td class="text-center">{{$trs->created_at}}</td>
+                                <td class="text-center"><input type="hidden" value="{{ $trs->total }}" class="form-control" name="total">{{$trs->total}}</td>
+                                {{-- <td class="text-center"><a class="btn btn-sm btn-info fas fa-info" href="detail_lap_penjualan/{{ $trs->id_transaksi }}"></a></td> --}}
+                                <td class="text-center">
+                                    <input type="hidden" value="{{ $trs->id_transaksi }}" class="form-control" name="id">
+                                    <button type="submit" class="btn btn-sm btn-info fas fa-info"></button>
+                                </td>
+                            </tr>
+                        </form>
                         @endforeach
                 </tbody>
                 <tfoot>

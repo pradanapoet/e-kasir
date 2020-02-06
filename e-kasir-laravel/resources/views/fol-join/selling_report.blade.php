@@ -7,9 +7,17 @@
 @endsection
 
 @section('content')
+    <?php $total_pem = 0 ?>
+    <?php $total_pemasukan = 0 ?>
+    @foreach ($transaksi as $t)
+        <?php $total_pem += $t->total ?>
+    @endforeach
+    <?php $total_pemasukan = number_format($total_pem,2,",",".") ?>
+
     <div class="container">
         <h3>Laporan Penjualan</h3>
         <div class="card shadow">
+            <a class="btn btn-info shadow" style="width:50px; margin-top:20px; margin-left:25px;" href="/lap_penjualan_pemilik_print"><i class="fas fa-print"></i></a>
             <div class="container mt-4 mb-4">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -39,8 +47,14 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2" class="font-weight-bold">Total</td>
+                            <td colspan="2" class="hidden-xs text-center"><strong>Rp.<span class="cart-total">{{ $total_pemasukan }}</span></strong>,-</td>
+                        </tr>
+                    </tfoot>
                     </table>
-                </div>
+                </div>  
             </div>
         </div>
     </div>

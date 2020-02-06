@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\StokModel;
 use Carbon\Carbon;
+use Excel;
+use App\Http\Controllers\Controller;
+use App\Exports\ExportBarang;
+use App\Exports\ExportBarangFromView;
+
 
 class PemilikController extends Controller
 {
@@ -47,87 +52,18 @@ class PemilikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-       //
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(Request $request)
-    // {
-    //     $id = $request->input('id');
-    //     CategoryModel::destroy($id);
-    //     return redirect('/kategori_pemilik')->with('fail', ' ');
-    // }
-
-    // public function kategori()
-    // {
-    //     $kategori = CategoryModel::all();
-    //     return view('fol-join.category',compact('kategori'));
-    // }
-    // public function listbarang()
-    // {
-    //     return view('fol-join.list_item');
-    // }
-    // public function liststok()
-    // {
-    //     return view('fol-join.list_stock_item');
-    // }
+    
     public function laporan_penjualan()
     {
         $transaksi = DB::table('transaksi')->get();
         return view('fol-join.selling_report',compact('transaksi'));
+    }
+
+    public function laporan_penjualan_print()
+    {
+        $carbon = Carbon::now();
+        $transaksi = DB::table('transaksi')->get();
+        return view('fol-join.selling_report_print',compact('transaksi','carbon'));
     }
 
     public function detail_laporan_penjualan(Request $request)
@@ -142,25 +78,53 @@ class PemilikController extends Controller
         return view('fol-join.selling_report_detail',compact('detail_transaksi','total'));
     }
 
+    
+
     public function laporan_laba()
     {
+        $status_sort = "belum";
         $dari = NULL;
         $sampai = NULL;
         $transaksi = DB::table('transaksi')->get();
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
-        return view('fol-join.profit_report',compact('transaksi','stok','dari','sampai'));
+        return view('fol-join.profit_report',compact('transaksi','stok','dari','sampai','status_sort'));
     }
+
+    public function laporan_laba_print()
+    {
+        $carbon = Carbon::now();
+        $dari = NULL;
+        $sampai = NULL;
+        $transaksi = DB::table('transaksi')->get();
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
+        return view('fol-join.profit_report_print',compact('transaksi','stok','dari','sampai','carbon'));
+    }
+
     public function laporan_laba_sort(Request $request)
     {
+        $status_sort = "sudah";
         $dari = $request->dari;
         $sampai = $request->sampai;
         $transaksi = DB::table('transaksi')
         ->whereBetween('created_at',array($dari,$sampai))->get();
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')
         ->whereBetween('stok.tanggal_masuk',array($dari,$sampai))->get();
-        return view('fol-join.profit_report',compact('transaksi','stok','dari','sampai'));
-
+        return view('fol-join.profit_report',compact('transaksi','stok','dari','sampai','status_sort'));
     }
+
+    public function laporan_laba_print_sorted(Request $request)
+    {
+        $carbon = Carbon::now();
+        dd($request);
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $transaksi = DB::table('transaksi')
+        ->whereBetween('created_at',array($dari,$sampai))->get();
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')
+        ->whereBetween('stok.tanggal_masuk',array($dari,$sampai))->get();
+        return view('fol-join.profit_report_print',compact('transaksi','stok','dari','sampai','carbon'));
+    }
+
     public function laporan_barang()
     {
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
@@ -169,8 +133,13 @@ class PemilikController extends Controller
     
     public function laporan_barang_print()
     {
-        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
-        return view('fol-join.item_report_print', compact('stok'));
+        $carbon = Carbon::now();
+        $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')
+        ->orderBy('stok.status')->get();
+        return view('fol-join.item_report_print', compact('stok','carbon'));
+
+        // return Excel::download(new ExportBarang, 'barang.xlsx');
+        // return Excel::download(new ExportBarangFromView, 'LaporanBarang.xlsx');
     }
 
     public function update_status($id)
@@ -179,11 +148,6 @@ class PemilikController extends Controller
         //dd($update);
         $update->update(['status' => 'expired']);
         $update->save();
-
-        // $htmlCart = view('fol-join._tabelnotif')->render();
-
-        // return response()->json(['data' => $htmlCart]);
-            // return redirect('/pos');
             return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
     public function kadaluarsa()

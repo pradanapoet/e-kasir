@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <h3>Laporan Barang</h3>
-        <div class="card">
+        <div class="card shadow">
             <a class="btn btn-info shadow" style="width:50px; margin-top:20px; margin-left:25px;" href="/lap_barang_pemilik_print"><i class="fas fa-print"></i></a>
             <div class="container mt-4 mb-4">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
