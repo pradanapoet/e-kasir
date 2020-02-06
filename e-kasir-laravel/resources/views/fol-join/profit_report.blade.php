@@ -111,15 +111,16 @@
                         <a href="/lap_laba_pemilik" class="btn btn-sm btn-danger">RESET</a>
                     </div>
                 </form>
-                {{-- {{ $status_sort }} --}}
+                {{ $status_sort }}
                     @if ($status_sort=='belum')
                         <a class="btn btn-info shadow float-right d-inline" style="width:50px; margin-top:20px; margin-left:25px;" href="/lap_laba_pemilik_print"><i class="fas fa-print"></i></a>
                     @else
-                    <form action="/lap_laba_pemilik_print">
-                        <input type="hidden" name="dari" value="{{$dari}}" class="form-control" required>
-                        <input type="hidden" name="sampai" value="{{$sampai}}" class="form-control" required>
+                    <form method="post" action="/lap_laba_pemilik_print_sorted">
+                        @csrf
+                        <div><input type="hidden" name="dari" value="{{$dari}}" class="form-control" required></div>
+                        <div><input type="hidden" name="sampai" value="{{$sampai}}" class="form-control" required></div>
                         <button type="submit" class="btn btn-info shadow float-right d-inline" style="width:50px; margin-top:20px; margin-left:25px;"><i class="fas fa-print"></i></button>
-                    </form> 
+                    </form>
                     @endif
             </div>
         </div>

@@ -52,7 +52,7 @@ class PemilikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function laporan_penjualan()
     {
         $transaksi = DB::table('transaksi')->get();
@@ -78,7 +78,7 @@ class PemilikController extends Controller
         return view('fol-join.selling_report_detail',compact('detail_transaksi','total'));
     }
 
-    
+
 
     public function laporan_laba()
     {
@@ -115,7 +115,7 @@ class PemilikController extends Controller
     public function laporan_laba_print_sorted(Request $request)
     {
         $carbon = Carbon::now();
-        dd($request);
+        //dd($request);
         $dari = $request->dari;
         $sampai = $request->sampai;
         $transaksi = DB::table('transaksi')
@@ -130,7 +130,7 @@ class PemilikController extends Controller
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
         return view('fol-join.item_report', compact('stok'));
     }
-    
+
     public function laporan_barang_print()
     {
         $carbon = Carbon::now();

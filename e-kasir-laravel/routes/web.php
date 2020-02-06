@@ -39,8 +39,8 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
         Route::get('/lap_penjualan_pemilik_print', 'PemilikController@laporan_penjualan_print');
     Route::post('/detail_lap_penjualan', 'PemilikController@detail_laporan_penjualan');
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
-        Route::get('/lap_laba_pemilik_print', 'PemilikController@laporan_laba_print');
-        Route::post('/lap_laba_pemilik_print', 'PemilikController@laporan_laba_print_sorted');
+    Route::post('/lap_laba_pemilik_print_sorted', 'PemilikController@laporan_laba_print_sorted');
+    Route::get('/lap_laba_pemilik_print', 'PemilikController@laporan_laba_print');
     Route::post('/lap_laba_pemilik', 'PemilikController@laporan_laba_sort');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
         Route::get('/lap_barang_pemilik_print', 'PemilikController@laporan_barang_print');
