@@ -7,9 +7,10 @@
     <title>Document</title>
 </head>
 <body onload="window.print();">
-        
+
         ====================================<br>
-        PHP MART
+        CV. Mitra Informatika <br>
+        www.mitrainformatika.net
         <br>
         OPERATOR : SOPYAN
         <br>
@@ -68,7 +69,7 @@
         ============TERIMAKASIH============
 
 
-        
+
             <a href="/pos/store-selesai">Done</a>
             <button class="btn btn-success mb-3" href="/pos/store-selesai">Selesai</button>
     </div>

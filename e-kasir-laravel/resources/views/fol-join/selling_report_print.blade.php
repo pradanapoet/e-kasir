@@ -9,7 +9,7 @@
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
-<body>
+<body onload="window.print()">
     <?php $total_pem = 0 ?>
     <?php $total_pemasukan = 0 ?>
     @foreach ($transaksi as $t)
@@ -41,10 +41,10 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <i style="font-size:10dp">Dicetak Pada : {{ $carbon->toDateTimeString() }}</i> 
+                <i style="font-size:10dp">Dicetak Pada : {{ $carbon->toDateTimeString() }}</i>
             </div>
             <div class="col-6">
-                <a class="float-right btn btn-outline-dark" href="/lap_barang_pemilik" id="btn-kembali">Kembali</a>
+                <a class="float-right btn btn-outline-dark" href="@if (auth()->user()->role=='pemilik') /lap_penjualan_pemilik @else /lap_penjualan_kasir @endif" id="btn-kembali">Kembali</a>
             </div>
         </div>
         <div class="row mt-4">
@@ -76,8 +76,8 @@
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
 </body>
 </html>

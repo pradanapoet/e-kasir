@@ -17,13 +17,15 @@
     <div class="container">
         <h3>Laporan Penjualan</h3>
         <div class="card shadow">
-            <a class="btn btn-info shadow" style="width:50px; margin-top:20px; margin-left:25px;" href="/lap_penjualan_pemilik_print"><i class="fas fa-print"></i></a>
+            <a class="btn btn-info shadow" style="width:50px; margin-top:20px; margin-left:25px;" href="
+            @if (auth()->user()->role=='pemilik')/lap_penjualan_pemilik_print @else /lap_penjualan_kasir_print @endif"><i class="fas fa-print"></i></a>
             <div class="container mt-4 mb-4">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead class="thead-dark">
                             <tr>
                                 <th style="width: 10px;">#</th>
+                                <th class="text-center">ID Transaksi</th>
                                 <th class="text-center">Tgl Transaksi</th>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Action</th>
@@ -36,6 +38,7 @@
                             <form action="/detail_lap_penjualan" method="post" class="d-inline">
                             @csrf
                                 <td style="width: 10px;"> {{ $loop->iteration }} </td>
+                                <td class="text-center">{{$trs->id_transaksi}}</td>
                                 <td class="text-center">{{$trs->created_at}}</td>
                                 <td class="text-center"><input type="hidden" value="{{ $trs->total }}" class="form-control" name="total">{{$trs->total}}</td>
                                 {{-- <td class="text-center"><a class="btn btn-sm btn-info fas fa-info" href="detail_lap_penjualan/{{ $trs->id_transaksi }}"></a></td> --}}
@@ -54,7 +57,7 @@
                         </tr>
                     </tfoot>
                     </table>
-                </div>  
+                </div>
             </div>
         </div>
     </div>

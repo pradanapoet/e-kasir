@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CategoryModel;
+use App\KategoriModel;
 
 class KasirController extends Controller
 {
@@ -23,11 +23,12 @@ class KasirController extends Controller
      */
     public function kategori()
     {
-        $kategori = CategoryModel::all();
+        $kategori = KategoriModel::all();
         return view('fol-join.category',compact('kategori'));
     }
     public function listbarang()
     {
+        
         return view('fol-join.list_item');
     }
     public function liststok()

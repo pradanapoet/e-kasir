@@ -36,14 +36,14 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
     Route::post('/tambah_stok', 'StokController@tambah_stok'); //tambah stok
     Route::post('/liststok_pemilik/update', 'StokController@update'); // update stok
     Route::get('/lap_penjualan_pemilik', 'PemilikController@laporan_penjualan');
-        Route::get('/lap_penjualan_pemilik_print', 'PemilikController@laporan_penjualan_print');
+    Route::get('/lap_penjualan_pemilik_print', 'PemilikController@laporan_penjualan_print');
     Route::post('/detail_lap_penjualan', 'PemilikController@detail_laporan_penjualan');
     Route::get('/lap_laba_pemilik', 'PemilikController@laporan_laba');
     Route::post('/lap_laba_pemilik_print_sorted', 'PemilikController@laporan_laba_print_sorted');
     Route::get('/lap_laba_pemilik_print', 'PemilikController@laporan_laba_print');
     Route::post('/lap_laba_pemilik', 'PemilikController@laporan_laba_sort');
     Route::get('/lap_barang_pemilik', 'PemilikController@laporan_barang');
-        Route::get('/lap_barang_pemilik_print', 'PemilikController@laporan_barang_print');
+    Route::get('/lap_barang_pemilik_print', 'PemilikController@laporan_barang_print');
     Route::get('/stok_kadaluarsa', 'PemilikController@kadaluarsa');
     Route::get('update-status/{id}', 'PemilikController@update_status');
 
@@ -54,12 +54,15 @@ Route::group(['middleware' => ['auth','checkRole:pemilik']],function(){
 Route::group(['middleware' => ['auth','checkRole:kasir']],function(){
 
     Route::get('/kasir', 'KasirController@index');
-    Route::get('/kategori_kasir', 'KasirController@kategori');
-    Route::get('/listbarang_kasir', 'KasirController@listbarang');
-    Route::get('/liststok_kasir', 'KasirController@liststok');
-    Route::get('/lap_penjualan_kasir', 'KasirController@laporan_penjualan');
-    Route::get('/lap_laba_kasir', 'KasirController@laporan_laba');
-    Route::get('/lap_barang_kasir', 'KasirController@laporan_barang');
+    Route::get('/kategori_kasir', 'KategoriController@index');
+    Route::get('/listbarang_kasir', 'BarangController@index');
+    Route::get('/liststok_kasir', 'StokController@index');
+    Route::get('/lap_penjualan_kasir', 'PemilikController@laporan_penjualan');
+    Route::get('/lap_penjualan_kasir_print', 'PemilikController@laporan_penjualan_print');
+    // Route::get('/lap_laba_kasir', 'PemilikController@laporan_laba');
+    Route::get('/lap_barang_kasir', 'PemilikController@laporan_barang');
+    Route::get('/lap_barang_kasir_print', 'PemilikController@laporan_barang_print');
+
 
 });
 
@@ -73,4 +76,5 @@ Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
     Route::get('add-to-cart/{id}', 'POSController@addToCart');
     Route::get('remove-from-cart/{id}', 'POSController@remove');
     Route::post('/print-barcode', 'StokController@print_barcode');
+
 });

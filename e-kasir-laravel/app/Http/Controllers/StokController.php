@@ -140,10 +140,16 @@ class StokController extends Controller
     public function print_barcode(Request $request)
     {
         // dd($request->id);
-        $barcode = PDF::loadview('fol-join.printable_barcode',['id_stok'=>$request->id]);
-        return $barcode->download("barcode-$request->id");
+        $id_stok = $request->id;
+        $nama_barang = $request->nama;
+        $jumlah = $request->jumlah;
+        // dd($nama_barang);
+        // dd($id_stok);
+        return view('fol-join.printable_barcode',compact('id_stok','nama_barang','jumlah'));
+        // $barcode = PDF::loadview('fol-join.printable_barcode',['id_stok'=>$request->id]);
+        // return $barcode->download("barcode-$request->id");
         // return $barcode->stream();
-        
+
     }
 
     }

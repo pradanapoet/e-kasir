@@ -9,7 +9,7 @@
     <!-- Bootstrap & CSS-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
-<body>
+<body onload="window.print()">
 
     <?php $total_p = 0 ?>
     <?php $total_pengeluaran = 0 ?>
@@ -52,10 +52,10 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <i style="font-size:10dp">Dicetak Pada : {{ $carbon->toDateTimeString() }}</i> 
+                <i style="font-size:10dp">Dicetak Pada : {{ $carbon->toDateTimeString() }}</i>
             </div>
             <div class="col-6">
-                <a class="float-right btn btn-outline-dark" href="/lap_barang_pemilik" id="btn-kembali">Kembali</a>
+                <a class="float-right btn btn-outline-dark" href="/lap_laba_pemilik" id="btn-kembali">Kembali</a>
             </div>
         </div>
         <div class="row mt-4">
@@ -128,6 +128,7 @@
                     <thead>
                     <tr>
                         <th style="width: 10px;">#</th>
+                        <th class="text-center">ID Transaksi</th>
                         <th class="text-center">Tgl Transaksi</th>
                         <th class="text-center">Sub-Total</th>
                     </tr>
@@ -136,6 +137,7 @@
                     @foreach ($transaksi as $trs)
                     <tr>
                         <td style="width: 10px;"> {{ $loop->iteration }} </td>
+                        <td class="text-center">{{$trs->id_transaksi}}</td>
                         <td class="text-center">{{$trs->created_at}}</td>
                         <td class="text-center"><input type="hidden" value="{{ $trs->total }}" class="form-control" name="total">{{$trs->total}}</td>
                     </tr>
@@ -148,7 +150,7 @@
                 </table>
             </div>
         </div>
-        
-    </div>    
+
+    </div>
 </body>
 </html>

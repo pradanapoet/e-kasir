@@ -87,7 +87,11 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Pemilik
+                @if (auth()->user()->role=='pemilik')
+                    pemilik
+                @else
+                    kasir
+                @endif
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -128,7 +132,6 @@
                             <a class="collapse-item" href="/lap_barang_pemilik">Laporan Barang</a>
                         @else
                             <a class="collapse-item" href="/lap_penjualan_kasir">Laporan Penjualan</a>
-                            <a class="collapse-item" href="/lap_laba_kasir">Laporan Laba</a>
                             <a class="collapse-item" href="/lap_barang_kasir">Laporan Barang</a>
                         @endif
                     </div>

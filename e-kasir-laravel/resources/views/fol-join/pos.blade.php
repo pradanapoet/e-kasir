@@ -26,9 +26,8 @@
 @endif
 <span id="status"></span>
 <div class="container">
-    <br>
-    <div>
-        <div class="container">
+    <div class="card shadow">
+        <div class="container mt-4 mb-4">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
@@ -64,9 +63,13 @@
         </div>
     </div>
     <br>
-        <div class="row" id="header-bar">
-            @include('fol-join._tabelpos')
+    <div class="card shadow">
+        <div class="container mt-4 mb-4">
+            <div class="row" id="header-bar">
+                @include('fol-join._tabelpos')
+            </div>
         </div>
+    </div>
 </div>
 
 @endsection
