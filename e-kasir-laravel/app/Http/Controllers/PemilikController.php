@@ -21,30 +21,276 @@ class PemilikController extends Controller
      */
     public function index()
     {
+        $year = Carbon::now()->format('Y');
+        $monthNow = Carbon::now()->format('m');
+
+        $transaksi = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', $monthNow )->whereYear('created_at', '=', $year)->get();
+        $transaksi0 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '01')->whereYear('created_at', '=', $year)->get();
+        $transaksi1 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '02')->whereYear('created_at', '=', $year)->get();
+        $transaksi2 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '03')->whereYear('created_at', '=', $year)->get();
+        $transaksi3 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '04')->whereYear('created_at', '=', $year)->get();
+        $transaksi4 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '05')->whereYear('created_at', '=', $year)->get();
+        $transaksi5 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '06')->whereYear('created_at', '=', $year)->get();
+        $transaksi6 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '07')->whereYear('created_at', '=', $year)->get();
+        $transaksi7 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '08')->whereYear('created_at', '=', $year)->get();
+        $transaksi8 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '09')->whereYear('created_at', '=', $year)->get();
+        $transaksi9 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '10')->whereYear('created_at', '=', $year)->get();
+        $transaksi10 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '11')->whereYear('created_at', '=', $year)->get();
+        $transaksi11 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '12')->whereYear('created_at', '=',
+        $year)->get();
+
+        $stok = DB::table('stok')->select('*')->whereMonth('created_at', '=', $monthNow)->whereYear('created_at', '=',
+        $year)->get();
+        $stok0 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '01')->whereYear('created_at', '=',
+        $year)->get();
+        $stok1 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '02')->whereYear('created_at', '=',
+        $year)->get();
+        $stok2 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '03')->whereYear('created_at', '=',
+        $year)->get();
+        $stok3 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '04')->whereYear('created_at', '=',
+        $year)->get();
+        $stok4 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '05')->whereYear('created_at', '=',
+        $year)->get();
+        $stok5 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '06')->whereYear('created_at', '=',
+        $year)->get();
+        $stok6 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '07')->whereYear('created_at', '=',
+        $year)->get();
+        $stok7 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '08')->whereYear('created_at', '=',
+        $year)->get();
+        $stok8 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '09')->whereYear('created_at', '=',
+        $year)->get();
+        $stok9 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '10')->whereYear('created_at', '=',
+        $year)->get();
+        $stok10 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '11')->whereYear('created_at', '=',
+        $year)->get();
+        $stok11 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '12')->whereYear('created_at', '=',
+        $year)->get();
+
+        $jml_mail = DB::table('barang')->select('*')->count();
+
+        //Batas
         $total_pemasukan = null;
         $total_pengeluaran = null;
         $masuk = null;
         $sisa = null;
-        $jml_mail = DB::table('barang')
-                        ->select('*')
-                        ->count();
-        $stok = DB::table('stok')
-                        ->select('*')
-                        ->get();
-                        foreach ($stok as $s) {
-                            $masuk += $s->jumlah_stok_masuk;
-                            $sisa += $s->sisa_stok;
-                            $total_pengeluaran += $s->jumlah_stok_masuk * $s->harga_beli;
-                        }
+        $hasil = null;
+        $total = null;
+        foreach ($stok as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
         $hasil = $masuk - $sisa;
-        $transaksi = DB::table('transaksi')
-                    ->select('total')->get();
-                    foreach ($transaksi as $t) {
-                        $total_pemasukan += $t->total;
-                    }
+        foreach ($transaksi as $t0) {
+            $total_pemasukan += $t0->total;
+        }
         $total = $total_pemasukan - $total_pengeluaran;
-        $keuntungan = number_format($total,2,",",".");
-        return view('fol-pemilik.index',compact('jml_mail','hasil','keuntungan'));
+        $keuntungan = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok0 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi0 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan0 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok1 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi1 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan1 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok2 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi2 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan2 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok3 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi3 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan3 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok4 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi4 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan4 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok5 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi5 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan5 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok6 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi6 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan6 = number_format($total,2,",",".");
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok7 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi7 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan7 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok8 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi8 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan8 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok9 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi9 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan9 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok10 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi10 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan10 = $total;
+
+        //Batas
+        $total_pemasukan = null;
+        $total_pengeluaran = null;
+        $masuk = null;
+        $sisa = null;
+        $total = null;
+        foreach ($stok11 as $s0) {
+            $masuk += $s0->jumlah_stok_masuk;
+            $sisa += $s0->sisa_stok;
+            $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
+        }
+        foreach ($transaksi11 as $t0) {
+            $total_pemasukan += $t0->total;
+        }
+        $total = $total_pemasukan - $total_pengeluaran;
+        $keuntungan11 = $total;
+        return view('fol-pemilik.index',compact('jml_mail','hasil','keuntungan','keuntungan0','keuntungan1','keuntungan2','keuntungan3','keuntungan4','keuntungan5','keuntungan6','keuntungan7','keuntungan8','keuntungan9','keuntungan10','keuntungan11'));
     }
 
     /**
