@@ -72,51 +72,6 @@ class POSController extends Controller
         return redirect('/pos')->with('success_transaksi', ' ');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\POSModel  $pOSModel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(POSModel $pOSModel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\POSModel  $pOSModel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(POSModel $pOSModel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\POSModel  $pOSModel
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, POSModel $pOSModel)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\POSModel  $pOSModel
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(POSModel $pOSModel)
-    {
-        //
-    }
-
     public function addToCart($id)
     {
         // $product = DB::table('stok')->get();

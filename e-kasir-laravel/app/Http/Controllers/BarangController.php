@@ -21,57 +21,7 @@ class BarangController extends Controller
 
         return view('fol-join.list_item',compact('kategori','barangjoin'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\BarangModel  $barangModel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BarangModel $barangModel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\BarangModel  $barangModel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BarangModel $barangModel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BarangModel  $barangModel
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, BarangModel $barangModel)
     {
         $request->validate([

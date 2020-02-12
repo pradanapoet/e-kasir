@@ -383,15 +383,11 @@ class PemilikController extends Controller
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')
         ->orderBy('stok.status')->get();
         return view('fol-join.item_report_print', compact('stok','carbon'));
-
-        // return Excel::download(new ExportBarang, 'barang.xlsx');
-        // return Excel::download(new ExportBarangFromView, 'LaporanBarang.xlsx');
     }
 
     public function update_status($id)
     {
         $update = StokModel::find($id);
-        //dd($update);
         $update->update(['status' => 'expired']);
         $update->save();
             return redirect()->back()->with('success', 'Product added to cart successfully!');

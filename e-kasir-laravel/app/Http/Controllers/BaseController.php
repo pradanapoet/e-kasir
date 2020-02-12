@@ -18,5 +18,3 @@ class BaseController extends Controller {
     }
 
 }
-
-}

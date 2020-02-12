@@ -25,56 +25,6 @@ class StokController extends Controller
         return view('fol-join.list_stock_item',compact('stok','barang'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\StokModel  $stokModel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(StokModel $stokModel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\StokModel  $stokModel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(StokModel $stokModel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StokModel  $stokModel
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, StokModel $stokModel)
     {
         $request->validate([
