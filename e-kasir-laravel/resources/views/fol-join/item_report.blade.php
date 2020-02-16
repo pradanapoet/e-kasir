@@ -37,8 +37,8 @@
                             <td>{{$stok->jumlah_stok_masuk - $stok->sisa_stok }}</td>
                             <td>{{ $stok->sisa_stok }}</td>
                             <td>{{ $stok->status }}</td>
-                            <td>
-                            <button type="button" class="badge badge-secondary" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}">Detail</button>
+                            <td class="text-center">
+                            <button type="button" class="btn btn-info fas fa-info" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}"></button>
                             </td>
                         </tr>
                         @endforeach
@@ -54,7 +54,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-book-open"> </i><b>Detail Stok</b></h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><b>Detail Stok</b></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -47,13 +47,13 @@
                         <td style="width: 380px;" class="kategori" id="nama_barang">{{ $stok->nama_barang }}</td>
                         <td style="width: 40px;" class="text-center" id="harga_jual">Rp.{{ $stok->harga_jual }},-</td>
                         <td style="width: 40px;" class="text-center stok" id="stok">{{ $stok->sisa_stok }}</td>
-                        @if ($stok->sisa_stok != 0)
+                        @if ($stok->sisa_stok > 0)
                         <td style="width: 30px;" class="text-center">
                             <a href="javascript:void(0);" data-item-id_stok="{{ $stok->id_stok }}" class="btn btn-success btn-sm text-center add-to-cart" role="button"><i style="size:2x;" class="fas fa-plus icon-size"></i></a>
                                 <i class="fa fa-circle-o-notch fa-spin btn-loading fa-spinner text-center" style="font-size:20px; display: none"></i>
                         </td>
                         @else
-                        <td>Stok Habis</td>
+                        <td class="text-center">Kosong</td>
                         @endif
 
                     </tr>

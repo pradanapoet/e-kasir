@@ -88,7 +88,7 @@
     <!-- Content Row -->
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h4>Rentan Pencarian</h4>
+            <h4>Rentang Pencarian</h4>
         </div>
         <div class="card-body">
             <div class="container mt-3">
@@ -113,7 +113,6 @@
                         <a href="/lap_laba_pemilik" class="btn btn-sm btn-danger">RESET</a>
                     </div>
                 </form>
-                {{ $status_sort }}
                 @if ($status_sort=='belum')
                 <a class="btn btn-info shadow float-right d-inline"
                     style="width:50px; margin-top:20px; margin-left:25px;" href="/lap_laba_pemilik_print"><i

@@ -24,6 +24,18 @@ class PemilikController extends Controller
         $year = Carbon::now()->format('Y');
         $monthNow = Carbon::now()->format('m');
 
+        $detail_transaksi = DB::table('detail_transaksi')->select('*')->whereMonth('created_at', '=', $monthNow )->whereYear('created_at', '=', $year)->get();
+
+        // $stok_perbulan = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', $monthNow )->whereYear('tanggal_masuk', '=', $year)->get();
+
+        // $stok_perbulan = DB::table('stok')
+        //         ->select('id_barang', DB::raw('SUM(jumlah_stok_masuk-sisa_stok) as terjual'))
+        //         ->whereMonth('tanggal_masuk', '=', $monthNow )->whereYear('tanggal_masuk', '=', $year)
+        //         ->groupBy('id_barang')
+        //         ->get();
+        // dd($stok_perbulan);
+
+
         $transaksi = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', $monthNow )->whereYear('created_at', '=', $year)->get();
         $transaksi0 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '01')->whereYear('created_at', '=', $year)->get();
         $transaksi1 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '02')->whereYear('created_at', '=', $year)->get();
@@ -39,36 +51,38 @@ class PemilikController extends Controller
         $transaksi11 = DB::table('transaksi')->select('*')->whereMonth('created_at', '=', '12')->whereYear('created_at', '=',
         $year)->get();
 
-        $stok = DB::table('stok')->select('*')->whereMonth('created_at', '=', $monthNow)->whereYear('created_at', '=',
+        $stok = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', $monthNow)->whereYear('created_at', '=',
         $year)->get();
-        $stok0 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '01')->whereYear('created_at', '=',
+        $stok0 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '01')->whereYear('created_at', '=',
         $year)->get();
-        $stok1 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '02')->whereYear('created_at', '=',
+        $stok1 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '02')->whereYear('created_at', '=',
         $year)->get();
-        $stok2 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '03')->whereYear('created_at', '=',
+        $stok2 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '03')->whereYear('created_at', '=',
         $year)->get();
-        $stok3 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '04')->whereYear('created_at', '=',
+        $stok3 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '04')->whereYear('created_at', '=',
         $year)->get();
-        $stok4 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '05')->whereYear('created_at', '=',
+        $stok4 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '05')->whereYear('created_at', '=',
         $year)->get();
-        $stok5 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '06')->whereYear('created_at', '=',
+        $stok5 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '06')->whereYear('created_at', '=',
         $year)->get();
-        $stok6 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '07')->whereYear('created_at', '=',
+        $stok6 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '07')->whereYear('created_at', '=',
         $year)->get();
-        $stok7 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '08')->whereYear('created_at', '=',
+        $stok7 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '08')->whereYear('created_at', '=',
         $year)->get();
-        $stok8 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '09')->whereYear('created_at', '=',
+        $stok8 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '09')->whereYear('created_at', '=',
         $year)->get();
-        $stok9 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '10')->whereYear('created_at', '=',
+        $stok9 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '10')->whereYear('created_at', '=',
         $year)->get();
-        $stok10 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '11')->whereYear('created_at', '=',
+        $stok10 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '11')->whereYear('created_at', '=',
         $year)->get();
-        $stok11 = DB::table('stok')->select('*')->whereMonth('created_at', '=', '12')->whereYear('created_at', '=',
+        $stok11 = DB::table('stok')->select('*')->whereMonth('tanggal_masuk', '=', '12')->whereYear('created_at', '=',
         $year)->get();
 
-        $jml_mail = DB::table('barang')->select('*')->count();
+        $jml_brg = DB::table('barang')->select('*')->count();
 
         //Batas
+        $stok_terjual = null;
+        $terjual = null;
         $total_pemasukan = null;
         $total_pengeluaran = null;
         $masuk = null;
@@ -76,16 +90,21 @@ class PemilikController extends Controller
         $hasil = null;
         $total = null;
         foreach ($stok as $s0) {
-            $masuk += $s0->jumlah_stok_masuk;
-            $sisa += $s0->sisa_stok;
+            $terjual += $s0->jumlah_stok_masuk - $s0->sisa_stok;
             $total_pengeluaran += $s0->jumlah_stok_masuk * $s0->harga_beli;
         }
         $hasil = $masuk - $sisa;
         foreach ($transaksi as $t0) {
             $total_pemasukan += $t0->total;
         }
+
+        foreach($detail_transaksi as $dt){
+            $terjual += $dt->jumlah;
+        }
+
         $total = $total_pemasukan - $total_pengeluaran;
         $keuntungan = $total;
+        $stok_terjual = $terjual;
 
         //Batas
         $total_pemasukan = null;
@@ -290,7 +309,7 @@ class PemilikController extends Controller
         }
         $total = $total_pemasukan - $total_pengeluaran;
         $keuntungan11 = $total;
-        return view('fol-pemilik.index',compact('jml_mail','hasil','keuntungan','keuntungan0','keuntungan1','keuntungan2','keuntungan3','keuntungan4','keuntungan5','keuntungan6','keuntungan7','keuntungan8','keuntungan9','keuntungan10','keuntungan11'));
+        return view('fol-pemilik.index',compact('year','jml_brg','hasil','stok_terjual','keuntungan','keuntungan0','keuntungan1','keuntungan2','keuntungan3','keuntungan4','keuntungan5','keuntungan6','keuntungan7','keuntungan8','keuntungan9','keuntungan10','keuntungan11'));
     }
 
     /**
@@ -333,7 +352,7 @@ class PemilikController extends Controller
         $sampai = NULL;
         $transaksi = DB::table('transaksi')->get();
         $stok = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->get();
-        return view('fol-join.profit_report',compact('transaksi','stok','dari','sampai','status_sort'));
+        return view('fol-join.profit_report',compact('transaksi','stok','dari','sampai','status_sort',));
     }
 
     public function laporan_laba_print()

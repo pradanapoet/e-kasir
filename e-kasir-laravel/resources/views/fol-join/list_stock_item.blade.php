@@ -24,14 +24,14 @@
         <div class="col-12">
             @if(auth()->user()->role=='pemilik')
             <button type="button" class="btn btn-primary mb-3 shadow" data-toggle="modal"
-                data-target=".modal-tambah-barang">Tambah Stok Barang</button>
+                data-target=".modal-tambah-barang"><i class="fas fa-plus"></i> Tambah Stok Barang</button>
             @if (count($errors) > 0)
             <div class="alert alert-danger ">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>Whoops!</strong> Stok Barang Tidak Berhasil Ditambahkan.<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <li>{{ 'Masukkan data stok barang terlebih dahulu sebelum menyimpannya.' }}</li>
+                    <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -80,7 +80,9 @@
                                 @foreach ($stok as $stok)
                                 <?php
                             $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
-                            $barcode = $generator->getBarcode($stok->id_stok, $generator::TYPE_CODE_128);?>
+                            $barcode = $generator->getBarcode($stok->id_stok, $generator::TYPE_CODE_128);
+                            ?>
+                            
                                 <tr>
                                     <th class="text-center" scope="col">{{ $loop->iteration }}</th>
                                     <td class="align-middle kategori text-left" id="nama_barang">
@@ -91,7 +93,9 @@
                                         {{ $stok->tanggal_kadaluarsa }}</td>
                                     <td class="text-center">{{ $stok->jumlah_stok_masuk }}</td>
                                     <td class="text-center">
-                                        <?php echo $barcode ?>
+                                        <div class="text-center">
+                                        <p> <?php echo $barcode ?> </p>
+                                        </div>
                                     </td>
                                     <td class="text-center">
                                         <button type="button" class="badge badge-secondary" id="detail-item"
@@ -277,7 +281,8 @@
         </div>
     </div>
     <!-- Modal Edit Stok -->
-    <!-- Cetak Stok Modal -->
+
+    <!-- Cetak Barcode Modal -->
     <div class="modal fade" id="cetak-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -9,8 +9,8 @@
 @section('content')
 <div class="container">
     @if(auth()->user()->role=='pemilik')
-    <button type="button" class="btn btn-primary mb-3 shadow" data-toggle="modal"
-        data-target=".modal-tambah-barang">Tambah Barang</button>
+    <button type="button" class="btn btn-primary mb-3 shadow" id="modal-tambah-barang" data-toggle="modal"
+        data-target=".modal-tambah-barang"><i class="fas fa-plus"></i> Tambah Barang</button>
     <div class="card shadow">
         <div class="container mb-4 mt-4">
             <div class="row">
@@ -22,7 +22,7 @@
                         <strong>Whoops!</strong> Barang Tidak Berhasil Ditambahkan.<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)
-                            <li>{{ 'Masukkan nama kategori terlebih dahulu sebelum menyimpannya.' }}</li>
+                            <li>{{$error}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -48,7 +48,12 @@
                         <strong>Yuhuu!</strong> Barang Terpilih Telah Dihapus.
                     </div>
                     @endif
-                    @endif
+                </div>
+            </div>
+    @elseif(auth()->user()->role=='kasir')
+        <div class="card shadow">
+            <div class="container mt-4 mb-4">   
+    @endif
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead class="thead-dark">
                             <tr>
@@ -57,7 +62,7 @@
                                 <th scope="col">Nama Kategori</th>
                                 <th scope="col">Keterangan</th>
                                 @if (auth()->user()->role=='pemilik')
-                                <th scope="col">Aksi</th>
+                                <th scope="col" class="text-center">Aksi</th>
                                 @endif
                             </tr>
                         </thead>
@@ -69,16 +74,16 @@
                                 <td class="align-middle kategori" id="nama_kategori">{{$brg->nama_kategori}}</td>
                                 <td class="align-middle kategori" id="keterangan">{{ $brg->keterangan }}</td>
                                 @if (auth()->user()->role=='pemilik')
-                                <td>
-                                    <button type="button" class="badge badge-info" id="edit-item"
+                                <td class="text-center">                                    
+                                    <button type="button" class="badge badge-info " id="edit-item"
                                         data-item-id_barang="{{$brg->id_barang}}"
                                         data-item-nama_barang="{{$brg->nama_barang}}"
                                         data-item-id_kategori="{{$brg->id_kategori}}"
-                                        data-item-keterangan="{{$brg->keterangan}}">edit</button>
+                                        data-item-keterangan="{{$brg->keterangan}}">Edit</button>
                                     <form action="/listbarang_pemilik/hapus" method="post" class="d-inline">
                                         @csrf
                                         <input type="hidden" value="{{$brg->id_barang}}" class="form-control" name="id">
-                                        <button type="submit" class="badge badge-danger">Hapus</button>
+                                        <button type="submit" class="badge badge-danger ">Hapus</button>
                                     </form>
                                 </td>
                                 @endif
@@ -95,8 +100,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header bg-dark">
-                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i
-                                        class="fas fa-book-open"> </i><b>Tambah Kategori</b></h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><b>Tambah Kategori</b></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     style="color: #fff;">
                                     <span aria-hidden="true">&times;</span>
@@ -107,7 +111,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Nama Barang</label>
-                                        <input type="text" name="nama_barang" class="form-control" placeholder=". . .">
+                                        <input type="text" name="nama_barang" id="focusFirst" class="form-control" placeholder=". . .">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Kategori Barang</label>
@@ -133,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal Tambah Buku -->
+                <!-- Modal Tambah Barang -->
 
                 <!-- Attachment Modal -->
 
@@ -142,8 +146,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-dark">
-                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i
-                                        class="fas fa-book-open"> </i><b>Edit Kategori</b></h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><b>Edit Kategori</b></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     style="color: #fff;">
                                     <span aria-hidden="true">&times;</span>
@@ -191,10 +194,15 @@
 
 <script>
     $(document).ready(function() {
+    
+    //Auto Focus Modal
+    $('.modal-tambah-barang').on('shown.bs.modal', function() {
+        $('#focusFirst').trigger('focus');
+    });
+
   /**
    * for showing edit item popup
    */
-
   $(document).on('click', "#edit-item", function() {
     $(this).addClass('edit-item-trigger-clicked'); //ketika klik
 

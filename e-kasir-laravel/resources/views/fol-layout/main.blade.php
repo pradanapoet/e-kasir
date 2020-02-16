@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="css/sb-admin-2.css">
     <link rel="stylesheet" type="text/css" href="css/sb-admin-2.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <!-- Custom styles for table -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -217,7 +218,10 @@
                                         </i>
                                     @endforeach
                                 </div>
-                                <a class="dropdown-item text-center small text-gray-600" href="/stok_kadaluarsa">Daftar Barang Kadaluarsa</a>
+                                @if(auth()->user()->role=='pemilik')
+                                    <a class="dropdown-item text-center small text-gray-600" href="/stok_kadaluarsa">Daftar Barang Kadaluarsa</a>
+                                @endif
+                                
                             </div>
                         </li>
 

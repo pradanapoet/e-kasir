@@ -9,8 +9,8 @@
 @section('content')
 <div class="container">
     @if(auth()->user()->role=='pemilik')
-    <button type="button" class="btn btn-primary mb-3 shadow" data-toggle="modal"
-        data-target=".modal-tambah-kategori">Tambah Kategori</button>
+    <button type="button" class="btn btn-primary mb-3 shadow " data-toggle="modal"
+        data-target=".modal-tambah-kategori"><i class="fas fa-plus"></i></a> Tambah Kategori</button>
     <div class="card shadow">
         <div class="container mt-4 mb-4">
             <div class="row">
@@ -47,14 +47,19 @@
                         <strong>Yuhuu!</strong> Kategori Terpilih Telah Dihapus.
                     </div>
                     @endif
-                    @endif
+                </div>
+            </div>
+    @elseif(auth()->user()->role=='kasir')
+        <div class="card shadow">
+            <div class="container mt-4 mb-4">   
+    @endif
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nama Kategori</th>
                                 @if (auth()->user()->role=='pemilik')
-                                <th scope="col">Aksi</th>
+                                <th class="text-center" scope="col">Aksi</th>
                                 @endif
                             </tr>
                         </thead>
@@ -64,14 +69,13 @@
                                 <th scope="col">{{ $loop->iteration }}</th>
                                 <td class="align-middle kategori" id="nama">{{ $kat->nama_kategori }}</td>
                                 @if (auth()->user()->role=='pemilik')
-                                <td>
-                                    <button type="button" class="badge badge-info" id="edit-item"
-                                        data-item-id="{{$kat->id_kategori}}"
-                                        data-item-nama="{{$kat->nama_kategori}}">edit</button>
+                                <td class="text-center">
+                                    <button type="button" class="badge badge-info" id="edit-item" 
+                                        data-item-id="{{$kat->id_kategori}}" 
+                                        data-item-nama="{{$kat->nama_kategori}}">Edit</button>
                                     <form action="/kategori_pemilik/hapus" method="post" class="d-inline">
                                         @csrf
-                                        <input type="hidden" value="{{$kat->id_kategori}}" class="form-control"
-                                            name="id">
+                                        <input type="hidden" value="{{$kat->id_kategori}}" class="form-control" name="id">
                                         <button type="submit" class="badge badge-danger">Hapus</button>
                                     </form>
                                 </td>
@@ -89,8 +93,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header bg-dark">
-                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i
-                                        class="fas fa-book-open"> </i><b>Tambah Kategori</b></h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><b>Tambah Kategori</b></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     style="color: #fff;">
                                     <span aria-hidden="true">&times;</span>
@@ -101,8 +104,7 @@
                                     @csrf
                                     <div class="form-group">
                                         {{-- <label><i class="fas fa-book text-dark"></i>Nama Kategori</label> --}}
-                                        <input type="text" name="nama_kategori" class="form-control"
-                                            placeholder="Nama Kategori">
+                                        <input type="text" name="nama_kategori" class="form-control" id="focusFirst" required oninvalid="this.setCustomValidity('Mohon Isi Kolom Terlebih Dahulu !')" placeholder="Nama Kategori">
                                     </div>
                                     <!-- Perlu Edit Posisi Modal Footer -->
                                     <div class="modal-footer">
@@ -115,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal Tambah Buku -->
+                <!-- Modal Tambah Kategori -->
 
                 <!-- Attachment Modal -->
 
@@ -168,6 +170,11 @@
     };
     $('#edit-modal').modal(options)
   })
+
+  //Auto Focus Modal
+    $('.modal-tambah-kategori').on('shown.bs.modal', function() {
+        $('#focusFirst').trigger('focus');
+    });
 
   // on modal show
   $('#edit-modal').on('show.bs.modal', function() {
