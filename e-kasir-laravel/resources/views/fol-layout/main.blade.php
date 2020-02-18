@@ -61,7 +61,7 @@
             @if(auth()->user()->role=='pemilik')
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pemilik">
             @elseif(auth()->user()->role=='kasir')
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/kasir">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             @endif
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
@@ -73,15 +73,13 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+            @if(auth()->user()->role=='pemilik')
             <li class="nav-item active">
-                @if(auth()->user()->role=='pemilik')
                     <a class="nav-link" href="/pemilik">
-                @elseif(auth()->user()->role=='kasir')
-                    <a class="nav-link" href="/kasir">
-                @endif
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
             </li>
+                @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider">

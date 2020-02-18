@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth','checkRole:kasir,pemilik']],function(){
     Route::get('/pos', 'POSController@index');
     Route::post('/pos/store', 'POSController@store');
     Route::get('/pos/store-selesai', 'POSController@store_selesai');
-    Route::get('add-to-cart/{id}', 'POSController@addToCart');
+    Route::get('add-to-cart/{id}/{jumlah}', 'POSController@addToCart');
     Route::get('remove-from-cart/{id}', 'POSController@remove');
     Route::post('/print-barcode', 'StokController@print_barcode');
 

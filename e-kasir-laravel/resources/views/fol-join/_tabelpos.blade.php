@@ -42,6 +42,8 @@
                         <a class="btn btn-danger btn-sm" style="width: 30px;"
                             href="remove-from-cart/{{ $details['id_stok'] }}"><i
                                 class="far fa-trash-alt icon-size"></i></a>
+                        {{-- <i href="javascript:void(0);" data-item-remove-id_stok="{{ $details['id_stok'] }}" class="btn btn-danger btn-sm text-center remove-from-cart" role="button"><i style="size:2x;" class="fas fa-plus icon-size"></i></i> --}}
+
                         <i class="fa fa-circle-o-notch fa-spin btn-loading" style="font-size:24px; display: none"></i>
                     </td>
                 </tr>

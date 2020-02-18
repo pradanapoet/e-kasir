@@ -20,7 +20,7 @@ class AuthController extends Controller
             if( $request->user()->role == 'pemilik' ){
                 return redirect('/pemilik');
             }else{
-                return redirect('/kasir');
+                return redirect('/pos');
             }
 
         }

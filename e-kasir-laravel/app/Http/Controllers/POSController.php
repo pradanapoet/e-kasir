@@ -72,10 +72,10 @@ class POSController extends Controller
         return redirect('/pos')->with('success_transaksi', ' ');
     }
 
-    public function addToCart($id)
+    public function addToCart($id,$jumlah)
     {
         // $product = DB::table('stok')->get();
-
+       //return ($id . $jumlah);
         $product = DB::table('stok')->join('barang','stok.id_barang','=','barang.id_barang')->where('id_stok',$id)->get();
         // dd($product);
         if(!$product) {
@@ -92,7 +92,7 @@ class POSController extends Controller
                 $id => [
                     "id_stok" => $product[0]->id_stok,
                     "nama" => $product[0]->nama_barang,
-                    "kuantitas" => 1,
+                    "kuantitas" => $jumlah,
                     "harga" => $product[0]->harga_jual,
                     "kadaluarsa" => $product[0]->tanggal_kadaluarsa
 
@@ -111,7 +111,7 @@ class POSController extends Controller
         // if cart not empty then check if this product exist then increment quantity
         if(isset($cart[$id])) {
 
-            $cart[$id]['kuantitas']++;
+            $cart[$id]['kuantitas']+=$jumlah;
 
             session()->put('cart', $cart);
 
@@ -127,7 +127,7 @@ class POSController extends Controller
         $cart[$id] = [
             "id_stok" => $product[0]->id_stok,
             "nama" => $product[0]->nama_barang,
-            "kuantitas" => 1,
+            "kuantitas" => $jumlah,
             "harga" => $product[0]->harga_jual,
             "kadaluarsa" => $product[0]->tanggal_kadaluarsa
         ];
