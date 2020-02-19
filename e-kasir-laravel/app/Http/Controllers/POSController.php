@@ -160,9 +160,9 @@ class POSController extends Controller
 
             $htmlCart = view('fol-join._tabelpos')->render();
 
-            //return response()->json(['data' => $htmlCart, 'total' => $total]);
+            return response()->json(['data' => $htmlCart]);
 
-            return redirect('/pos');
+            // return redirect('/pos');
             //session()->flash('success', 'Product removed successfully');
         }
     }

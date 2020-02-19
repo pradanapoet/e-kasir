@@ -49,8 +49,11 @@
                         <td style="width: 40px;" class="text-center stok" id="stok">{{ $stok->sisa_stok }}</td>
                         @if ($stok->sisa_stok > 0)
                         <td style="width: 30px;" class="text-center">
-                            <a href="javascript:void(0);" data-item-id_stok="{{ $stok->id_stok }}" class="btn btn-success btn-sm text-center add-to-cart" role="button"><i style="size:2x;" class="fas fa-plus icon-size"></i></a>
-                                <i class="fa fa-circle-o-notch fa-spin btn-loading fa-spinner text-center" style="font-size:20px; display: none"></i>
+                            <a href="javascript:void(0);" data-item-id_stok="{{ $stok->id_stok }}"
+                                class="btn btn-success btn-sm text-center add-to-cart" role="button"><i style="size:2x;"
+                                    class="fas fa-plus icon-size"></i></a>
+                            <i class="fa fa-circle-o-notch fa-spin btn-loading fa-spinner text-center"
+                                style="font-size:20px; display: none"></i>
                         </td>
                         @else
                         <td class="text-center">Kosong</td>
@@ -76,8 +79,8 @@
 
 @section('scripts')
 
-    <script type="text/javascript">
-        $(".add-to-cart").click(function (e) {
+<script type="text/javascript">
+    $(".add-to-cart").click(function (e) {
             e.preventDefault();
             var person = prompt("Jumlah barang", "1");
             console.log(person);
@@ -104,74 +107,35 @@
                         }
                     });
             }
-            
+
         });
-    </script>
+</script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
+    //selector .on => event, ketika click elemen apa? si .remove-form-cart
 
-        $(".update-cart").click(function (e) {
+        $("body").on('click', '.remove-from-cart',function (e) {
             e.preventDefault();
 
             var ele = $(this);
-
-            var parent_row = ele.parents("tr");
-
-            var quantity = parent_row.find(".quantity").val();
-
-            var product_subtotal = parent_row.find("span.product-subtotal");
-
             var cart_total = $(".cart-total");
-
-            var loading = parent_row.find(".btn-loading");
-
-            loading.show();
-
-            $.ajax({
-                url: '{{ url('update-cart') }}',
-                method: "patch",
-                data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: quantity},
-                dataType: "json",
-                success: function (response) {
-
-                    loading.hide();
-
-                    $("span#status").html('<div class="alert alert-success">'+response.msg+'</div>');
-
-                    $("#header-bar").html(response.data);
-
-                    product_subtotal.text(response.subTotal);
-
-                    cart_total.text(response.total);
-                }
-            });
+            var id = ele.attr("data-item-remove-id_stok");
+            if(confirm("Are you sure")) {
+                $.ajax({
+                    // url: '{{ url('remove-from-cart') }}',
+                    url: '{{ url('remove-from-cart') }}' + '/' + id,
+                    method: "GET",
+                    data: {_token: '{{ csrf_token() }}'},
+                    dataType: "json",
+                    success: function (response) {;
+                        ele.parents('tr').remove();
+                        // $("span#status").html('<div class="alert alert-success">'+response.msg+'</div>');
+                        $("#header-bar").html(response.data);
+                        // cart_total.text(response.total);
+                    }
+                });
+            }
         });
-
-        // $(".remove-from-cart").click(function (e) {
-        //     e.preventDefault();
-
-        //     var ele = $(this);
-
-        //    // var parent_row = ele.parents("tr");
-
-        //     var cart_total = $(".cart-total");
-
-
-        //         $.ajax({
-        //             // url: '{{ url('remove-from-cart') }}',
-        //             url: '{{ url('remove-from-cart') }}' + '/' + ele.attr("data-item-remove-id_stok"),
-        //             method: "GET",
-        //             data: {_token: '{{ csrf_token() }}'},
-        //             dataType: "json",
-        //             success: function (response) {
-        //                 location.reload();
-        //                 // parent_row.remove();
-        //                 // $("span#status").html('<div class="alert alert-success">'+response.msg+'</div>');
-        //                 // $("#header-bar").html(response.data);
-        //                 // cart_total.text(response.total);
-        //             }
-        //         });
-        // });
-    </script>
+</script>
 
 @stop

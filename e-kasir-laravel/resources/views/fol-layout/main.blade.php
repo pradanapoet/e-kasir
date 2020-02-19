@@ -41,9 +41,11 @@
     <!-- Custom styles for table -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-     <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -59,94 +61,97 @@
 
             <!-- Sidebar - Brand -->
             @if(auth()->user()->role=='pemilik')
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pemilik">
-            @elseif(auth()->user()->role=='kasir')
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pemilik">
+                @elseif(auth()->user()->role=='kasir')
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-            @endif
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">E-Kasir</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            @if(auth()->user()->role=='pemilik')
-            <li class="nav-item active">
-                    <a class="nav-link" href="/pemilik">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-                @endif
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                @if (auth()->user()->role=='pemilik')
-                    pemilik
-                @else
-                    kasir
-                @endif
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Barang</span>
+                    @endif
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">E-Kasir</div>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Barang :</h6>
 
-                        @if(auth()->user()->role=='pemilik')
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+
+                <!-- Nav Item - Dashboard -->
+                @if(auth()->user()->role=='pemilik')
+                <li class="nav-item active">
+                    <a class="nav-link" href="/pemilik">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                @endif
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    @if (auth()->user()->role=='pemilik')
+                    pemilik
+                    @else
+                    kasir
+                    @endif
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Barang</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Barang :</h6>
+
+                            @if(auth()->user()->role=='pemilik')
                             <a class="collapse-item" href="/kategori_pemilik">List Kategori</a>
                             <a class="collapse-item" href="/listbarang_pemilik">List Barang</a>
                             <a class="collapse-item" href="/liststok_pemilik">List Stok Barang</a>
-                        @else
+                            @else
                             <a class="collapse-item" href="/kategori_kasir">List Kategori</a>
                             <a class="collapse-item" href="/listbarang_kasir">List Barang</a>
                             <a class="collapse-item" href="/liststok_kasir">List Stok Barang</a>
-                        @endif
+                            @endif
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Laporan</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Laporan :</h6>
-                        @if(auth()->user()->role=='pemilik')
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Laporan :</h6>
+                            @if(auth()->user()->role=='pemilik')
                             <a class="collapse-item" href="/lap_penjualan_pemilik">Laporan Penjualan</a>
                             <a class="collapse-item" href="/lap_laba_pemilik">Laporan Laba</a>
                             <a class="collapse-item" href="/lap_barang_pemilik">Laporan Barang</a>
-                        @else
+                            @else
                             <a class="collapse-item" href="/lap_penjualan_kasir">Laporan Penjualan</a>
                             <a class="collapse-item" href="/lap_barang_kasir">Laporan Barang</a>
-                        @endif
+                            @endif
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="/pos">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Menu Kasir</span>
-                </a>
-            </li>
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/pos">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Menu Kasir</span>
+                    </a>
+                </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
 
         </ul>
@@ -171,14 +176,18 @@
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -190,36 +199,40 @@
                         </li>
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                            @if($notif > 0)
+                                @if($notif > 0)
                                 <span class="badge badge-danger badge-counter">{{ $notif }}</span>
-                            @endif
+                                @endif
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
                                     Barang Kadaluarsa
                                 </h6>
                                 <div id="notif">
                                     @foreach ($isi as $item)
-                                        <i class="dropdown-item d-flex align-items-center" style="pointer-events:none;">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate">{{ $item->nama_barang }}</div>
-                                                <div class="small text-gray-500">{{ $item->tanggal_kadaluarsa }}</div>
-                                            </div>
-                                        </i>
+                                    <i class="dropdown-item d-flex align-items-center" style="pointer-events:none;">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle"
+                                                src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">{{ $item->nama_barang }}</div>
+                                            <div class="small text-gray-500">{{ $item->tanggal_kadaluarsa }}</div>
+                                        </div>
+                                    </i>
                                     @endforeach
                                 </div>
                                 @if(auth()->user()->role=='pemilik')
-                                    <a class="dropdown-item text-center small text-gray-600" href="/stok_kadaluarsa">Daftar Barang Kadaluarsa</a>
+                                <a class="dropdown-item text-center small text-gray-600" href="/stok_kadaluarsa">Daftar
+                                    Barang Kadaluarsa</a>
                                 @endif
-                                
+
                             </div>
                         </li>
 
@@ -227,12 +240,14 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">@yield('user')</span>
                                 <img class="img-profile rounded-circle" src="/image/cat.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
                                 {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -258,7 +273,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                    @yield('content')
+                @yield('content')
                 <!-- /.container-fluid -->
 
             </div>
@@ -286,7 +301,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -310,9 +326,8 @@
 
 @section('scripts')
 
-    <script type="text/javascript">
-
-        $(".update-status").click(function (e) {
+<script type="text/javascript">
+    $(".update-status").click(function (e) {
             e.preventDefault();
 
             var ele = $(this);
@@ -355,6 +370,7 @@
         //         }
         //     });
         // });
-    </script>
+</script>
 @stop
+
 </html>
