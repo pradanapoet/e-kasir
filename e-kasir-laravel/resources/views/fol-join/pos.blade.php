@@ -137,5 +137,15 @@
             }
         });
 </script>
+<script>
+function sum() {
+    var total = document.getElementById('txt1').value;
+    var bayar = document.getElementById('txt2').value;
+    var result = parseFloat(bayar) - parseFloat(total);
+    if (!isNaN(result)) {
+        document.getElementById('txt3').value = result;
+    }
+}
+</script>
 
 @stop

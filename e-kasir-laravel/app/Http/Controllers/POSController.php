@@ -44,6 +44,7 @@ class POSController extends Controller
     public function store(Request $request)
     {
         $data = request()->except(['_token']);
+        // dd($data);
         $lastid=TransaksiModel::create($data)->id_transaksi;
         if(count($request->nama) > 0)
         {
@@ -63,7 +64,7 @@ class POSController extends Controller
         DetailTransaksiModel::insert($data2);
         }
         }
-        return view('fol-join.pos_struk',compact('lastid'));
+        return view('fol-join.pos_struk',compact('lastid','data'));
         // return redirect('/pos')->with('success_transaksi', ' ');
     }
 

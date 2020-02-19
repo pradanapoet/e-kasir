@@ -55,11 +55,20 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2" class="font-weight-bold">Total</td>
-                    <td colspan="2" class="hidden-xs"></td>
+                    <td colspan="4" class="font-weight-bold">Total</td>
                     <td class="hidden-xs text-center"><strong>Rp.<span
-                                class="cart-total">{{ $total }}</span></strong><input type="hidden" name="total"
+                                class="cart-total">{{ $total }}</span></strong><input type="hidden" id="txt1" name="total"
                             value="{{ $total }}">,-</td>
+                    <td colspan="1" class="hidden-xs"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="font-weight-bold">Tunai</td>
+                    <td class="hidden-xs text-center"><strong>Rp.<input type="text" name="tunai" id="txt2"  onkeyup="sum();" /></strong>,-</td>
+                    <td colspan="1" class="hidden-xs"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="font-weight-bold">Kembalian</td>
+                    <td class="hidden-xs text-center"><strong>Rp.<input type="text" id="txt3"  onkeyup="sum();" /></strong>,-</td>
                     <td colspan="1" class="hidden-xs"></td>
                 </tr>
             </tfoot>

@@ -12,7 +12,7 @@
         CV. Mitra Informatika <br>
         www.mitrainformatika.net
         <br>
-        OPERATOR : SOPYAN
+        OPERATOR : {{ auth()->user()->name }}
         <br>
         Id Transaksi : {{$lastid}}
         <br>
@@ -60,6 +60,18 @@
                 <td colspan="2" class="font-weight-bold">Total</td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Rp.<span class="cart-total">{{ $total }}</span></strong><input type="hidden" name="total" value="{{ $total }}">,-</td>
+                <td colspan="1" class="hidden-xs"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="font-weight-bold">Tunai</td>
+                <td colspan="2" class="hidden-xs"></td>
+                <td class="hidden-xs text-center"><strong>Rp.<span class="cart-total">{{ $data['tunai'] }}</span></strong><input type="hidden" name="total" value="{{ $total }}">,-</td>
+                <td colspan="1" class="hidden-xs"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="font-weight-bold">Kembalian</td>
+                <td colspan="2" class="hidden-xs"></td>
+                <td class="hidden-xs text-center"><strong>Rp.<span class="cart-total">{{ $data['tunai'] - $total }}</span></strong><input type="hidden" name="total" value="{{ $total }}">,-</td>
                 <td colspan="1" class="hidden-xs"></td>
             </tr>
             </tfoot>
