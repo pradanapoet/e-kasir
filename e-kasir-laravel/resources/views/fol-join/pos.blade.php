@@ -33,7 +33,7 @@
                     <tr>
                         <th style="width: 10px;">#</th>
                         <th style="width: 10px;">Code</th>
-                        <th style="width: 380px;" class="text-center">Nama Barang</th>
+                        <th style="width: 100px;" class="text-center">Nama Barang</th>
                         <th style="width: 40px;" class="text-center">Harga</th>
                         <th style="width: 40px;" class="text-center">Stok</th>
                         <th style="width: 30px;" class="text-center">Aksi</th>
@@ -42,10 +42,11 @@
                 <tbody>
                     @foreach ($stok as $stok)
                     <tr>
+                        <?php $harga = number_format($stok->harga_jual,2,",",".")?>
                         <th style="width: 10px;"> {{ $loop->iteration }} </th>
                         <th style="width: 10px;"> {{ $stok->id_stok }} </th>
-                        <td style="width: 380px;" class="kategori" id="nama_barang">{{ $stok->nama_barang }}</td>
-                        <td style="width: 40px;" class="text-center" id="harga_jual">Rp.{{ $stok->harga_jual }},-</td>
+                        <td style="width: 100px;" class="kategori" id="nama_barang">{{ $stok->nama_barang }}</td>
+                        <td style="width: 40px;" class="text-center" id="harga_jual">Rp. {{ $harga }},-</td>
                         <td style="width: 40px;" class="text-center stok" id="stok">{{ $stok->sisa_stok }}</td>
                         @if ($stok->sisa_stok > 0)
                         <td style="width: 30px;" class="text-center">
@@ -138,7 +139,7 @@
         });
 </script>
 <script>
-function sum() {
+    function sum() {
     var total = document.getElementById('txt1').value;
     var bayar = document.getElementById('txt2').value;
     var result = parseFloat(bayar) - parseFloat(total);
@@ -146,6 +147,33 @@ function sum() {
         document.getElementById('txt3').value = result;
     }
 }
+
+
+// /* Dengan Rupiah */
+// var dengan_rupiah = document.getElementById('txt2');
+// dengan_rupiah.addEventListener('keyup', function(e)
+// {
+// dengan_rupiah.value = formatRupiah(this.value,'Rp. ');
+// });
+
+// /* Fungsi */
+// function formatRupiah(angka, prefix)
+// {
+// var number_string = angka.replace(/[^,\d]/g, '').toString(),
+// split = number_string.split(','),
+// sisa = split[0].length % 3,
+// rupiah = split[0].substr(0, sisa),
+// ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+// if (ribuan) {
+// separator = sisa ? '.' : '';
+// rupiah += separator + ribuan.join('.');
+// }
+
+// rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+// return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+// }
+
 </script>
 
 @stop

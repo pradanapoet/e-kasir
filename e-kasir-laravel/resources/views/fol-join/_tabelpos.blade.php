@@ -22,16 +22,18 @@
                 <?php $total += $details['harga'] * $details['kuantitas'] ?>
 
                 <tr>
+                    <?php $harga = number_format($details['harga'],2,",",".")?>
+                    <?php $subtotal = number_format($details['harga'] * $details['kuantitas'],2,",",".")?>
                     <th style="width: 10px;" scope="col">{{ $loop->iteration }}</th>
                     <td data-th="Product">{{ $details['nama'] }}<input type="hidden" name="nama[]"
                             value="{{ $details['id_stok']}}"></td>
-                    <td style="width: 40px;" class="text-center" data-th="Price">Rp.{{ $details['harga'] }},-<input
-                            type="hidden" name="harga[]" value="{{ $details['harga']}}"></td>
+                    <td style="width: 40px;" class="text-center" data-th="Price">Rp.{{ $harga }},-<input type="hidden"
+                            name="harga[]" value="{{ $details['harga']}}"></td>
                     <td class="text-center" data-th="Quantity">{{ $details['kuantitas'] }}<input type="hidden"
                             name="jumlah[]" value="{{ $details['kuantitas']}}"></td>
                     <td style="width: 40px;" class="text-center" data-th="Subtotal" class="text-center">Rp.<span
                             class="product-subtotal" name="subtotal[]"
-                            value="{{ $details['harga'] * $details['kuantitas'] }}">{{ $details['harga'] * $details['kuantitas'] }},-</span><input
+                            value="{{ $details['harga'] * $details['kuantitas'] }}">{{ $subtotal }},-</span><input
                             type="hidden" name="subtotal[]" value="{{ $details['harga'] * $details['kuantitas'] }}">
                     </td>
                     <td class="text-center" class="actions" data-th="">
@@ -56,20 +58,22 @@
             <tfoot>
                 <tr>
                     <td colspan="4" class="font-weight-bold">Total</td>
-                    <td class="hidden-xs text-center"><strong>Rp.<span
-                                class="cart-total">{{ $total }}</span></strong><input type="hidden" id="txt1" name="total"
-                            value="{{ $total }}">,-</td>
+                    <td class="hidden-xs text-center">
+                        <?php $total1 = number_format($total,2,",",".")?>
+                        <strong>Rp.<span class="cart-total">{{ $total1 }}</span></strong><input type="hidden" id="txt1"
+                            name="total" value="{{ $total }}">,-</td>
                     <td colspan="1" class="hidden-xs"></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="font-weight-bold">Tunai</td>
-                    <td class="hidden-xs text-center"><strong>Rp.<input type="text" name="tunai" id="txt2"  onkeyup="sum();" /></strong>,-</td>
+                    <td class="hidden-xs text-center"><strong>Rp.<input type="text" name="tunai" id="txt2"
+                                onkeyup="sum();" /></strong>,-</td>
                     <td colspan="1" class="hidden-xs"></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="font-weight-bold">Kembalian</td>
-                    <td class="hidden-xs text-center"><strong>Rp.<input type="text" id="txt3"  onkeyup="sum();" /></strong>,-</td>
-                    <td colspan="1" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Rp.<input type="text" id="txt3" readonly onkeyup="sum();"/>
+                                </strong>,- </td> <td colspan="1" class="hidden-xs"></td>
                 </tr>
             </tfoot>
         </table>

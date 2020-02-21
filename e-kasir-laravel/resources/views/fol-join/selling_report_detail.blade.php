@@ -25,19 +25,22 @@
                     <tbody>
                         @foreach ($detail_transaksi as $dtrs)
                         <tr>
+                            <?php $harga = number_format($dtrs->harga,2,",",".")?>
+                            <?php $subtotal = number_format($dtrs->subtotal,2,",",".")?>
                             <td style="width: 10px;"> {{ $loop->iteration }} </td>
                             <td>{{$dtrs->nama_barang}}</td>
-                            <td>{{$dtrs->harga}}</td>
+                            <td>Rp. {{$harga}}</td>
                             <td>{{$dtrs->jumlah}}</td>
-                            <td>{{$dtrs->subtotal}}</td>
+                            <td>Rp. {{$subtotal}}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
+                            <?php $total1 = number_format($total,2,",",".")?>
                             <td colspan="2" class="font-weight-bold">Total</td>
                             <td colspan="2" class="hidden-xs"></td>
-                            <td class="hidden-xs"><strong>Rp.<span class="cart-total">{{ $total }}</span></strong>,-
+                            <td class="hidden-xs"><strong>Rp.<span class="cart-total">{{ $total1 }}</span></strong>,-
                             </td>
                         </tr>
                     </tfoot>

@@ -35,12 +35,13 @@
 
                             @foreach ($transaksi as $trs)
                             <tr>
+                            <?php $total1 = number_format($trs->total,2,",",".")?>
                             <form action="/detail_lap_penjualan" method="post" class="d-inline">
                             @csrf
                                 <td style="width: 10px;"> {{ $loop->iteration }} </td>
                                 <td class="text-center">{{$trs->id_transaksi}}</td>
                                 <td class="text-center">{{$trs->created_at}}</td>
-                                <td class="text-center"><input type="hidden" value="{{ $trs->total }}" class="form-control" name="total">{{$trs->total}}</td>
+                                <td class="text-center">Rp. <input type="hidden" value="{{ $trs->total }}" class="form-control" name="total">{{$total1 }}</td>
                                 {{-- <td class="text-center"><a class="btn btn-sm btn-info fas fa-info" href="detail_lap_penjualan/{{ $trs->id_transaksi }}"></a></td> --}}
                                 <td class="text-center">
                                     <input type="hidden" value="{{ $trs->id_transaksi }}" class="form-control" name="id">

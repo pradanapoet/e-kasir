@@ -152,14 +152,16 @@
                     <tbody>
                         @foreach ($stok as $stok)
                         <tr>
+                            <?php $harga = number_format($stok->harga_beli,2,",",".") ?>
+                            <?php $subtotal = number_format($stok->harga_beli * $stok->jumlah_stok_masuk,2,",",".") ?>
                             <th scope="col">{{ $loop->iteration }}</th>
                             <td class="align-middle kategori" id="nama_barang">{{ $stok->nama_barang }}</td>
                             <td class="align-middle kategori" id="tanggal_masuk">{{ $stok->tanggal_masuk }}</td>
                             <td class="align-middle kategori" id="tanggal_kadaluarsa">{{ $stok->tanggal_kadaluarsa }}
                             </td>
                             <td>{{ $stok->jumlah_stok_masuk }}</td>
-                            <td>{{$stok->harga_beli }}</td>
-                            <td>{{$stok->harga_beli * $stok->jumlah_stok_masuk}}</td>
+                            <td>{{ $harga }}</td>
+                            <td>{{ $subtotal }}</td>
                             <td>{{ $stok->status }}</td>
                         </tr>
                         @endforeach
@@ -195,13 +197,14 @@
                     <tbody>
                         @foreach ($transaksi as $trs)
                         <tr>
+                            <?php $total = number_format($trs->total,2,",",".") ?>
                             <form action="/detail_lap_penjualan" method="post" class="d-inline">
                                 @csrf
                                 <td style="width: 10px;"> {{ $loop->iteration }} </td>
                                 <td class="text-center">{{$trs->id_transaksi}}</td>
                                 <td class="text-center">{{$trs->created_at}}</td>
                                 <td class="text-center"><input type="hidden" value="{{ $trs->total }}"
-                                        class="form-control" name="total">{{$trs->total}}</td>
+                                        class="form-control" name="total">{{ $total }}</td>
                                 {{-- <td class="text-center"><a class="btn btn-sm btn-info fas fa-info" href="detail_lap_penjualan/{{ $trs->id_transaksi }}"></a>
                                 </td> --}}
                                 <td class="text-center">
