@@ -67,7 +67,7 @@
                 <tr>
                     <td colspan="4" class="font-weight-bold">Tunai</td>
                     <td class="hidden-xs text-center"><strong>Rp.<input type="text" name="tunai" id="txt2"
-                                onkeyup="sum();" /></strong>,-</td>
+                                onkeyup="sum();" required /></strong>,-</td>
                     <td colspan="1" class="hidden-xs"></td>
                 </tr>
                 <tr>
