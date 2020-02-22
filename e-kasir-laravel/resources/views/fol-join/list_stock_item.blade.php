@@ -84,20 +84,20 @@
                             ?>
                             
                                 <tr>
-                                    <th class="text-center" scope="col">{{ $loop->iteration }}</th>
+                                    <th class="align-middle text-center" scope="col">{{ $loop->iteration }}</th>
                                     <td class="align-middle kategori text-left" id="nama_barang">
                                         {{ $stok->nama_barang }}</td>
                                     <td class="align-middle kategori text-center" id="tanggal_masuk">
                                         {{ $stok->tanggal_masuk }}</td>
                                     <td class="align-middle kategori text-center" id="tanggal_kadaluarsa">
                                         {{ $stok->tanggal_kadaluarsa }}</td>
-                                    <td class="text-center">{{ $stok->jumlah_stok_masuk }}</td>
-                                    <td class="text-center">
+                                    <td class="align-middle text-center">{{ $stok->jumlah_stok_masuk }}</td>
+                                    <td class="align-middle text-center">
                                         <div class="text-center">
                                         <p> <?php echo $barcode ?> </p>
                                         </div>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="align-middle text-center">
                                         <button type="button" class="badge badge-secondary" id="detail-item"
                                             data-item-id_stok="{{$stok->id_stok}}"
                                             data-item-id_barang="{{$stok->id_barang}}"

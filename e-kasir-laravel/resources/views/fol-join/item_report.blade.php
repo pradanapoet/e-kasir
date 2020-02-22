@@ -29,15 +29,15 @@
                     <tbody>
                         @foreach ($stok as $stok)
                         <tr>
-                            <th scope="col">{{ $loop->iteration }}</th>
+                            <th class="align-middle" scope="col">{{ $loop->iteration }}</th>
                             <td class="align-middle kategori" id="nama_barang">{{ $stok->nama_barang }}</td>
                             <td class="align-middle kategori" id="tanggal_masuk">{{ $stok->tanggal_masuk }}</td>
                             <td class="align-middle kategori" id="tanggal_kadaluarsa">{{ $stok->tanggal_kadaluarsa }}</td>
-                            <td>{{ $stok->jumlah_stok_masuk }}</td>
-                            <td>{{$stok->jumlah_stok_masuk - $stok->sisa_stok }}</td>
-                            <td>{{ $stok->sisa_stok }}</td>
-                            <td>{{ $stok->status }}</td>
-                            <td class="text-center">
+                            <td class="align-middle">{{ $stok->jumlah_stok_masuk }}</td>
+                            <td class="align-middle">{{$stok->jumlah_stok_masuk - $stok->sisa_stok }}</td>
+                            <td class="align-middle">{{ $stok->sisa_stok }}</td>
+                            <td class="align-middle">{{ $stok->status }}</td>
+                            <td class="text-center align-middle">
                             <button type="button" class="btn btn-info fas fa-info" id="detail-item" data-item-id_stok="{{$stok->id_stok}}" data-item-id_barang="{{$stok->id_barang}}" data-item-stok_masuk="{{$stok->jumlah_stok_masuk}}" data-item-tanggal_masuk="{{$stok->tanggal_masuk}}" data-item-tanggal_kadaluarsa="{{$stok->tanggal_kadaluarsa}}" data-item-sisa_stok="{{$stok->sisa_stok}}" data-item-harga_beli="{{$stok->harga_beli}}" data-item-harga_jual="{{$stok->harga_jual}}"></button>
                             </td>
                         </tr>

@@ -13,12 +13,12 @@ class CreateTabelStok extends Migration
      */
     public function up()
     {
-        Schema::create('stoks', function (Blueprint $table) {
+        Schema::create('stok', function (Blueprint $table) {
             $table->bigIncrements('id_stok');
             $table->integer('id_barang');
             $table->integer('jumlah_stok_masuk');
-            $table->date('tanggal_masuk');
-            $table->date('tanggal_kadaluarsa');
+            $table->date('tanggal_masuk')->nullable();
+            $table->date('tanggal_kadaluarsa')->nullable();
             $table->integer('sisa_stok');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
@@ -34,6 +34,6 @@ class CreateTabelStok extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stoks');
+        Schema::dropIfExists('stok');
     }
 }
